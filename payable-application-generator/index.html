@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>应付账款垫付申请书与承诺函 PDF 自动生成</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/wizard.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Cross-border Contract Automation · 第六份文件</p>
+      <h1>进口应付账款垫付申请书与承诺函智能生成台</h1>
+      <p class="summary">面向跨境贸易和供应链金融场景的专业垫付申请书生成页面。信息按业务流程拆分为 4 个步骤，可逐页填写、返回修改，最后一页统一生成 PDF。</p>
+      <div class="page-switch">
+        <a href="http://127.0.0.1:8088/">委托代理协议</a>
+        <a href="http://127.0.0.1:8089/">俄英贸易合同</a>
+        <a href="http://127.0.0.1:8091/">附件2</a>
+        <a href="http://127.0.0.1:8092/">代理出口结算协议</a>
+        <a href="http://127.0.0.1:8093/">应付账款垫付协议</a>
+        <a class="active" href="http://127.0.0.1:8094/">当前：垫付申请书与承诺函</a>
+        <a href="http://127.0.0.1:8095/">付款保函</a>
+        <a href="http://127.0.0.1:8090/">合并生成页</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span>Professional Generator</span>
+      <strong>Payable Application · 自动填充 · PDF 输出</strong>
+      <small>已覆盖模板可填写位置：收件方、买方、卖方、金额、期限、合同、发票、装运港、费率、账户、索偿期限与签署日期。</small>
+    </div>
+  </header>
+
+  <div class="steps-strip">
+    <div class="step-pill"><div class="num">1</div><div><div class="label">双方信息</div><div class="desc">收件方、买方、卖方</div></div></div>
+    <div class="step-pill"><div class="num">2</div><div><div class="label">申请详情</div><div class="desc">金额、期限、合同、费率</div></div></div>
+    <div class="step-pill"><div class="num">3</div><div><div class="label">银行账户</div><div class="desc">供应商、代理收款、索偿</div></div></div>
+    <div class="step-pill"><div class="num">4</div><div><div class="label">签署生成</div><div class="desc">签署区、实时预览、生成 PDF</div></div></div>
+  </div>
+
+  <main class="layout wizard-shell">
+    <form id="applicationForm" class="panel wizard-container" method="post" action="/generate">
+      <div class="panel-head">
+        <div>
+          <h2>垫付申请书信息向导</h2>
+          <p>按步骤填写信息，可随时返回上一步修改。默认值来源于模板，可直接保留或按实际业务替换。带“*”的字段对应模板默认空白位置，建议完整填写。</p>
+        </div>
+        <button type="button" id="resetBtn" class="ghost">恢复默认值</button>
+      </div>
+
+      <div class="wizard-progress">
+        <div class="wizard-progress-header">
+          <div class="wizard-progress-title">Payable Application Workflow</div>
+          <div class="wizard-progress-counter"><span class="wizard-progress-text">步骤 1 / 4</span></div>
+        </div>
+        <div class="wizard-progress-track"><div class="wizard-progress-bar" style="width:25%"></div></div>
+        <div class="wizard-indicator"></div>
+      </div>
+
+      <div class="wizard-content">
+        <div class="wizard-step" data-wizard-step="1" data-wizard-title="双方信息">
+          <div class="wizard-step-title">双方信息</div>
+          <div class="wizard-step-subtitle">填写收件方（垫付方）、申请方（买方/进口商）和卖方（出口商）。这些信息会在正文和账户段落中同步替换。</div>
+
+          <section class="section-block" data-num="Ⅰ" data-step="第 1 步 · 收件方">
+            <h3>收件方（垫付方）</h3>
+            <p class="section-tip">这份申请书是写给“智链通达”的，模板默认就是。<strong>除非更换垫付方，否则不需要改</strong>。</p>
+            <div class="grid">
+              <label>致：（中文）<input name="recipient_zh" placeholder="例：智鏈通達供應鏈管理有限公司"></label>
+              <label>Кому:（俄文）<input name="recipient_ru" placeholder="例：СМАРТЧЭЙН НЕКСУС ЛИМИТЕД"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅱ" data-step="第 1 步 · 申请方">
+            <h3>申请方（买方/进口商）</h3>
+            <p class="section-tip"><strong>申请方 = 进口商 = 买方</strong>，也就是“我公司”。模板默认 AIRFLOT TECHNICS TH Ltd.，必须改成实际客户。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">需要填写</span>
+              <ol>
+                <li><b>买方公司名（英文）</b>：会替换正文中所有 <code>AIRFLOT TECHNICS TH Ltd.</code></li>
+                <li><b>买方公司名（俄文）</b>：会替换正文中所有 <code>ООО «ТД ЭЙРФЛОТ ТЕХНИКС»</code></li>
+              </ol>
+            </div>
+            <div class="grid">
+              <label>买方公司名（英文 / 中文）<input name="buyer_name_en" placeholder="例：AIRFLOT TECHNICS TH Ltd."></label>
+              <label>买方公司名（俄文）<input name="buyer_name_ru" placeholder="例：ООО «ТД ЭЙРФЛОТ ТЕХНИКС»"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅲ" data-step="第 1 步 · 卖方">
+            <h3>卖方（出口商）</h3>
+            <p class="section-tip">“卖方/Продавец”是与买方签贸易合同的出口商，也是供应商收款人。模板默认 GUANGDONG OSHUJIAN FURNITURE，必须改成实际供应商。</p>
+            <div class="grid">
+              <label class="wide">卖方公司名（中英通用）<input name="seller_name" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO.,LTD"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="2" data-wizard-title="申请详情">
+          <div class="wizard-step-title">申请详情</div>
+          <div class="wizard-step-subtitle">填写申请额度、期限、贸易合同、发票、装运港、应付账款确认金额、起息日、费率、到期日和备注。</div>
+
+          <section class="section-block" data-num="Ⅳ" data-step="第 2 步 · 申请详情">
+            <h3>核心金额条款</h3>
+            <p class="section-tip">文件里的 14 行表格，每一行都需要填。比例字段只填数字（不带 <code>%</code>），日期格式可用 <code>YYYY-MM-DD</code> 或 <code>2026年6月17日</code>。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">表格逐行填写</span>
+              <ol>
+                <li>申请垫付额度（CNY）</li>
+                <li>申请垫付期限（天）</li>
+                <li>贸易合同号 + 签订日期</li>
+                <li>贸易合同金额（CNY）</li>
+                <li><b>* 商业发票金额</b>（默认空白格）</li>
+                <li>货物装运港（中俄各一）</li>
+                <li><b>* 买方确认应付账款金额</b>（默认空白格）</li>
+                <li><b>* 买方确认原应付账款到期日</b>（默认空白格，作起息日）</li>
+                <li>资金占用费率（年化%）与逾期费率</li>
+                <li><b>* 买方确认垫付到期日</b>（默认空白格）</li>
+                <li><b>* 备注</b>（可选）</li>
+              </ol>
+            </div>
+            <div class="grid">
+              <label>① 申请垫付金额（人民币元）<input name="advance_amount" placeholder="例：500000.00"></label>
+              <label>② 申请垫付期限（天）<input name="advance_term_days" placeholder="例：90"></label>
+              <label>③ 贸易合同号<input name="trade_contract_no" placeholder="例：SM-TH01"></label>
+              <label>④ 贸易合同日期<input name="trade_contract_date" placeholder="例：2026-06-04 / 04.06.2026"></label>
+              <label>⑤ 贸易合同金额（CNY）<input name="trade_contract_amount" placeholder="例：500000.00"></label>
+              <label>⑥ * 商业发票金额（CNY）<input name="invoice_amount" placeholder="例：500000.00"></label>
+              <label>⑦ 装运港（中文）<input name="shipment_port_zh" placeholder="例：上海"></label>
+              <label>⑧ 装运港（俄文）<input name="shipment_port_ru" placeholder="例：Шанхай"></label>
+              <label>⑨ * 买方确认应付账款金额（CNY）<input name="buyer_confirmed_amount" placeholder="例：500000.00"></label>
+              <label>⑩ * 原应付账款到期日（起息日）<input name="interest_start_date" placeholder="例：2026-09-04"></label>
+              <label>⑪ 资金占用年化费率（%）<input name="fee_annual_percent" placeholder="例：8"></label>
+              <label>⑫ 逾期年化费率（%）<input name="fee_overdue_percent" placeholder="默认 18"></label>
+              <label>⑬ * 买方确认垫付到期日<input name="advance_due_date" placeholder="例：2026-09-15"></label>
+              <label class="wide">⑭ * 备注（可选）<textarea name="remarks" rows="2" placeholder="如有特殊说明请填写，否则可留空"></textarea></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="3" data-wizard-title="银行账户">
+          <div class="wizard-step-title">银行账户与索偿</div>
+          <div class="wizard-step-subtitle">填写供应商指定收款账户、智链通达指定的代理收款账户，以及收到通知后的偿付天数。</div>
+
+          <section class="section-block" data-num="Ⅴ" data-step="第 3 步 · 供应商账户">
+            <h3>供应商指定收款账户</h3>
+            <p class="section-tip">垫付款汇入此账户。<strong>收款人名称会自动跟随上一步的“卖方公司名”</strong>，这里填写开户银行和账号即可。</p>
+            <input type="hidden" name="supplier_payee_name">
+            <div class="grid">
+              <label>开户银行（中文/英文）<input name="supplier_bank_zh" placeholder="例：VTB Bank (PJSC) Shanghai Branch"></label>
+              <label>开户银行（俄文）<input name="supplier_bank_ru" placeholder="例：ВТБ Банк (ПАО) Шанхайский филиал"></label>
+              <label class="wide">收款账号<input name="supplier_account_no" placeholder="例：40807156200610027979"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅵ" data-step="第 3 步 · 代理收款">
+            <h3>代理收款单位</h3>
+            <p class="section-tip">承诺函要求买方必须把对应货款只汇到智链通达指定的代理收款方。模板默认空白，请填写智链通达指定的代收账户。</p>
+            <div class="grid">
+              <label>代理收款人名称<input name="agent_payee_name" placeholder="例：上海代收公司"></label>
+              <label>代理收款账号<input name="agent_account_no" placeholder="例：1234567890"></label>
+              <label class="wide">代理收款开户银行<input name="agent_bank" placeholder="例：中国工商银行上海分行"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅶ" data-step="第 3 步 · 索偿期限">
+            <h3>索偿期限</h3>
+            <p class="section-tip">如果买方未能按时还款，智链通达发出通知后 X 天内，买方需偿还全部本金和资金占用费。</p>
+            <div class="grid">
+              <label>收到通知后偿付天数<input name="claim_days" placeholder="例：3"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="4" data-wizard-title="签署生成">
+          <div class="wizard-step-title">签署与生成</div>
+          <div class="wizard-step-subtitle">填写盖章公司、法定代表人、实际控制人、联系电话和申请承诺日期。确认无误后点击“生成 PDF”。</div>
+
+          <section class="section-block" data-num="Ⅷ" data-step="第 4 步 · 签署区">
+            <h3>签署信息</h3>
+            <p class="section-tip">申请承诺日期一处填写，会自动同步到中文行和俄文行。</p>
+            <div class="grid">
+              <label class="wide">申请方公司名（盖章用）<input name="applicant_company_name" placeholder="一般与买方公司名相同"></label>
+              <label>法定代表人 / 授权代表（签字）<input name="legal_rep_name" placeholder="例：张三"></label>
+              <label>实际控制人（签字）<input name="actual_controller_name" placeholder="例：李四"></label>
+              <label class="wide">联系电话<input name="contact_phone" placeholder="例：+7 (495) 221-8026"></label>
+              <label>申请承诺日期 · 年<input name="sign_year" placeholder="例：2026"></label>
+              <label>申请承诺日期 · 月<input name="sign_month" placeholder="例：6"></label>
+              <label>申请承诺日期 · 日<input name="sign_day" placeholder="例：17"></label>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="wizard-nav">
+        <div class="wizard-nav-left">
+          <button type="button" class="wizard-btn wizard-btn-prev" onclick="Wizard.prev()">上一步</button>
+          <span id="status" class="wizard-status"></span>
+        </div>
+        <div class="wizard-nav-right">
+          <button type="button" class="wizard-btn wizard-btn-next" onclick="Wizard.next()">下一步</button>
+          <button type="submit" class="wizard-btn wizard-btn-generate" id="generate-btn">生成 PDF</button>
+        </div>
+      </div>
+    </form>
+
+    <aside class="preview panel">
+      <h2>实时填写预览</h2>
+      <p>这里只展示核心替换字段，最终 PDF 以 Word 模板排版为准。</p>
+      <div id="previewList" class="preview-list"></div>
+      <div class="notice">
+        <strong>填写常见疑问</strong>
+        <p>① 比例字段只填数字，不要带 %；② 默认 AIRFLOT 必须改成实际买方；③ 默认 GUANGDONG OSHUJIAN 必须改成实际卖方；④ 标 * 的空白格建议都填上；⑤ 代理收款单位账号通常由智链通达提供。</p>
+      </div>
+      <div class="notice">
+        <strong>已覆盖的模板位置</strong>
+        <p>收件方、买方、卖方、申请垫付金额、垫付期限、贸易合同号、合同日期、合同金额、商业发票金额、装运港、应付账款确认金额、起息日、费率、垫付到期日、备注、供应商账户、代理收款账户、索偿期限和签署日期。</p>
+      </div>
+      <div class="help-card">
+        <strong>跳转其他页面</strong>
+        <ul>
+          <li>第五份：<a href="http://127.0.0.1:8093/">应付账款垫付协议</a></li>
+          <li>第七份：<a href="http://127.0.0.1:8095/">付款保函</a></li>
+          <li>合并页：<a href="http://127.0.0.1:8090/">合并生成页</a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+  <script src="/wizard.js"></script>
+</body>
+</html>

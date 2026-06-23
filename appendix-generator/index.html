@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>附件2 PDF 单独生成</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/wizard.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Cross-border Contract Automation · 第三份文件</p>
+      <h1>附件2 PDF 智能生成台</h1>
+      <p class="summary">这个页面只生成「Приложение №2」附件2 文件。原来的基础信息、商品明细、附件条款、签字字段和 PDF 生成方式均保留，仅将页面整理成与 8095/8094/8093/8092 相似的逐步填写版式。</p>
+      <div class="page-switch">
+        <a href="http://127.0.0.1:8088/">委托代理协议</a>
+        <a href="http://127.0.0.1:8089/">俄英贸易合同</a>
+        <a class="active" href="http://127.0.0.1:8091/">当前：附件2</a>
+        <a href="http://127.0.0.1:8092/">代理出口结算协议</a>
+        <a href="http://127.0.0.1:8093/">应付账款垫付协议</a>
+        <a href="http://127.0.0.1:8094/">垫付申请书与承诺函</a>
+        <a href="http://127.0.0.1:8095/">付款保函</a>
+        <a href="http://127.0.0.1:8090/">合并生成页</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span>输出内容</span>
+      <strong>附件2 PDF（Приложение №2）</strong>
+      <small>导出时填写值带下划线区分；不填的字段会自动以下划线占位。</small>
+    </div>
+  </header>
+
+  <div class="steps-strip">
+    <div class="step-pill"><div class="num">1</div><div><div class="label">基础信息</div><div class="desc">合同号、日期、买卖双方信息</div></div></div>
+    <div class="step-pill"><div class="num">2</div><div><div class="label">商品明细</div><div class="desc">每项商品一行，自动汇总</div></div></div>
+    <div class="step-pill"><div class="num">3</div><div><div class="label">附件条款</div><div class="desc">总价、交付、付款、单据、验收</div></div></div>
+    <div class="step-pill"><div class="num">4</div><div><div class="label">签字生成</div><div class="desc">买卖双方签字 → 生成 PDF</div></div></div>
+  </div>
+
+  <main class="layout wizard-shell">
+    <form id="appendixForm" class="panel wizard-container" method="post" action="/generate">
+      <div class="panel-head">
+        <div>
+          <h2>附件2 信息向导</h2>
+          <p>按步骤填写信息，可随时返回上一步修改。商品明细仍按原来的「添加新产品」方式填写，提交和 PDF 下载逻辑保持不变。</p>
+        </div>
+        <button type="button" id="resetBtn" class="ghost">恢复默认值</button>
+      </div>
+
+      <div class="wizard-progress">
+        <div class="wizard-progress-header">
+          <div class="wizard-progress-title">Appendix No.2 Workflow</div>
+          <div class="wizard-progress-counter"><span class="wizard-progress-text">步骤 1 / 4</span></div>
+        </div>
+        <div class="wizard-progress-track"><div class="wizard-progress-bar" style="width:25%"></div></div>
+        <div class="wizard-indicator"></div>
+      </div>
+
+      <div class="wizard-content">
+        <div class="wizard-step" data-wizard-step="1" data-wizard-title="基础信息">
+          <div class="wizard-step-title">基础信息</div>
+          <div class="wizard-step-subtitle">填写附件号、合同号、日期、买方和卖方信息。这一步与「俄英贸易合同」页面里的基础字段相同。</div>
+
+          <section class="section-block" data-num="Ⅰ" data-step="第 1 步">
+            <div class="section-title-row">
+              <h3>基础信息</h3>
+              <span>合同号、日期、买卖双方</span>
+            </div>
+            <p class="section-tip"><strong>这一步与「俄英贸易合同」页面里的基础信息字段相同</strong>。如果合同已生成，可直接照抄相同的合同号与买卖双方信息，无需二次思考。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">填写要点</span>
+              <ul>
+                <li><b>合同号 / 附件号</b>必填，与第二份合同保持一致</li>
+                <li><b>买方</b>=俄方进口商；<b>卖方</b>=中方出口商</li>
+                <li><b>日期</b>俄文要写 <code>января / февраля / марта ...</code></li>
+              </ul>
+            </div>
+            <div id="baseFields" class="generated-fields"></div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="2" data-wizard-title="商品明细">
+          <div class="wizard-step-title">商品明细</div>
+          <div class="wizard-step-subtitle">每个 SKU 一行，至少 1 行。新增、删除、隐藏 JSON 同步仍由原页面脚本处理。</div>
+
+          <section class="section-block goods-block" data-num="Ⅱ" data-step="第 2 步">
+            <div class="section-title-row goods-title-row">
+              <div>
+                <h3>商品明细</h3>
+                <span>每项商品一行，导出时自动汇总到附件2</span>
+              </div>
+              <button type="button" class="ghost" id="addGoodsBtn">+ 添加新产品</button>
+            </div>
+            <p class="section-tip"><strong>每个 SKU 一行</strong>，至少 1 行。点击右上角「+ 添加新产品」可新增；不要的行点 × 删除即可。导出 PDF 时金额单位会自动按模板格式化。</p>
+            <input type="hidden" name="goods_items_json" id="goodsItemsJson">
+            <div id="goodsItems" class="goods-items"></div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="3" data-wizard-title="附件条款">
+          <div class="wizard-step-title">附件条款</div>
+          <div class="wizard-step-subtitle">填写总价、交付条件、付款条件、发货通知、单据清单和技术验收条款。</div>
+
+          <section class="section-block" data-num="Ⅲ" data-step="第 3 步">
+            <div class="section-title-row">
+              <h3>附件条款</h3>
+              <span>总价、交付、付款、单据和验收</span>
+            </div>
+            <p class="section-tip"><strong>这一段决定整批货款怎么收</strong>。预付款 + 尾款比例之和应为 <code>100%</code>；交付方式通常为 FCA / CIF / CIP 等 Incoterms 2020 术语。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">需要写清楚的内容</span>
+              <ol>
+                <li><b>总价</b>大写 + 小写（俄文/英文/数字三处都要对得上）</li>
+                <li><b>交付条件</b>写明 Incoterms 术语 + 港口/城市</li>
+                <li><b>付款条件</b>预付款比例、尾款时点、币种</li>
+                <li><b>单据清单</b>商业发票、装箱单、提单、原产地证等</li>
+                <li><b>技术验收</b>验收周期与处理方式</li>
+              </ol>
+            </div>
+            <div id="termsFields" class="generated-fields"></div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="4" data-wizard-title="签字生成">
+          <div class="wizard-step-title">签字与生成</div>
+          <div class="wizard-step-subtitle">填写买方和卖方签字代表信息。确认无误后生成附件2 PDF。</div>
+
+          <section class="section-block" data-num="Ⅳ" data-step="第 4 步">
+            <div class="section-title-row">
+              <h3>签字信息</h3>
+              <span>买方和卖方签字位</span>
+            </div>
+            <p class="section-tip">填双方签字代表的「姓名 / 职务」即可，签署日期会自动同步到第 1 步基础信息中的日期。</p>
+            <div id="signFields" class="generated-fields"></div>
+          </section>
+        </div>
+      </div>
+
+      <div class="wizard-nav">
+        <div class="wizard-nav-left">
+          <button type="button" class="wizard-btn wizard-btn-prev" onclick="Wizard.prev()">上一步</button>
+          <span id="status" class="wizard-status"></span>
+        </div>
+        <div class="wizard-nav-right">
+          <button type="button" class="wizard-btn wizard-btn-next" onclick="Wizard.next()">下一步</button>
+          <button id="submitBtn" type="submit" class="wizard-btn wizard-btn-generate">生成附件2 PDF</button>
+        </div>
+      </div>
+    </form>
+
+    <aside class="preview panel">
+      <h2>填写预览</h2>
+      <p>这里展示附件2 的主要字段，最终内容以 Word 模板排版为准。</p>
+      <div id="previewList" class="preview-list"></div>
+      <div class="notice">
+        <strong>填写常见疑问</strong>
+        <p>① 商品至少要有 1 行；② 总价大写、小写要对得上；③ 预付款 + 尾款 = 100%；④ 字段不填会自动以下划线占位。</p>
+      </div>
+      <div class="notice">
+        <strong>已保留的填写内容</strong>
+        <p>基础字段仍由 <code>baseFields</code> 动态生成；商品行仍由 <code>goodsItems</code> 和 <code>addGoodsBtn</code> 管理；条款和签字字段仍由原 <code>app.js</code> 渲染。</p>
+      </div>
+      <div class="help-card">
+        <strong>跳转其他页面</strong>
+        <ul>
+          <li>第一份：<a href="http://127.0.0.1:8088/">委托代理协议</a></li>
+          <li>第二份：<a href="http://127.0.0.1:8089/">俄英贸易合同</a></li>
+          <li>第四份：<a href="http://127.0.0.1:8092/">代理出口结算协议</a></li>
+          <li>第五份：<a href="http://127.0.0.1:8093/">应付账款垫付协议</a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+  <script src="/wizard.js"></script>
+</body>
+</html>

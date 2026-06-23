@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>俄英贸易合同 PDF 自动生成</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/wizard.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Cross-border Contract Automation · 第二份文件</p>
+      <h1>俄英贸易合同 PDF 智能生成台</h1>
+      <p class="summary">这份贸易合同是中俄双语左右双栏排版（左俄右英）。原页面的智能粘贴、买卖双方、银行信息、商品明细、附件条款和 PDF 生成方式均保留，仅将网页整理成与其他页面相似的逐步填写版式。</p>
+      <div class="page-switch">
+        <a href="http://127.0.0.1:8088/">委托代理协议</a>
+        <a class="active" href="http://127.0.0.1:8089/">当前：俄英贸易合同</a>
+        <a href="http://127.0.0.1:8091/">附件2</a>
+        <a href="http://127.0.0.1:8092/">代理出口结算协议</a>
+        <a href="http://127.0.0.1:8093/">应付账款垫付协议</a>
+        <a href="http://127.0.0.1:8094/">垫付申请书与承诺函</a>
+        <a href="http://127.0.0.1:8095/">付款保函</a>
+        <a href="http://127.0.0.1:8090/">合并生成页</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span>模板来源</span>
+      <strong>ВТК № GOF040626CHN от 04.06.2026.docx</strong>
+      <small>按模板黄色标注字段生成 PDF；导出时黄色底色会清除，填写值用下划线标识。</small>
+    </div>
+  </header>
+
+  <div class="steps-strip">
+    <div class="step-pill"><div class="num">1</div><div><div class="label">基础信息</div><div class="desc">合同号 / 签订日期 / 附件号</div></div></div>
+    <div class="step-pill"><div class="num">2</div><div><div class="label">买卖双方</div><div class="desc">买方=俄方进口商；卖方=中方出口商</div></div></div>
+    <div class="step-pill"><div class="num">3</div><div><div class="label">银行 · 商品</div><div class="desc">收款银行、SWIFT、附件商品明细</div></div></div>
+    <div class="step-pill"><div class="num">4</div><div><div class="label">附件签字</div><div class="desc">附件抬头、4–8 节条款、双方签字</div></div></div>
+  </div>
+
+  <main class="layout wizard-shell">
+    <form id="contractForm" class="panel wizard-container" method="post" action="/generate">
+      <div class="panel-head">
+        <div>
+          <h2>俄英贸易合同信息向导</h2>
+          <p>按步骤填写信息，可随时返回上一步修改。智能粘贴、商品多行、实时预览和 PDF 下载逻辑保持原样。</p>
+        </div>
+        <button type="button" id="resetBtn" class="ghost">恢复模板默认值</button>
+      </div>
+
+      <div class="wizard-progress">
+        <div class="wizard-progress-header">
+          <div class="wizard-progress-title">Russian-English Trade Contract Workflow</div>
+          <div class="wizard-progress-counter"><span class="wizard-progress-text">步骤 1 / 4</span></div>
+        </div>
+        <div class="wizard-progress-track"><div class="wizard-progress-bar" style="width:25%"></div></div>
+        <div class="wizard-indicator"></div>
+      </div>
+
+      <div class="wizard-content">
+        <div class="wizard-step" data-wizard-step="1" data-wizard-title="基础信息">
+          <div class="wizard-step-title">基础信息</div>
+          <div class="wizard-step-subtitle">可先使用智能粘贴区批量识别字段，再核对合同号、附件号和日期。</div>
+
+      <section class="smart-paste">
+        <h3>智能粘贴区（可选）</h3>
+        <p>把已有的合同要素整段贴进来，自动识别字段名后填入下方表格。</p>
+        <textarea id="smartPasteInput" rows="7" placeholder="粘贴格式示例：
+合同编号：GOF-04/06-26-CHN
+合同日期（俄文）：«04» июня 2026 г.
+合同日期（英文）：04 of June 2026
+卖方名称：GUANGDONG OSHUJIAN FURNITURE CO.,LTD
+卖方地址（英文）：Sicun Industrial, Heqing...
+卖方银行（英文）：VTB Bank (PJSC) Shanghai Branch
+SWIFT：VTBRCNSH
+账户号：40807156200610027979"></textarea>
+        <div class="smart-paste-actions">
+          <span>格式：<code>字段名：值</code>（每行一个字段）</span>
+          <button type="button" id="smartParseBtn">智能解析粘贴</button>
+        </div>
+        <p id="smartPasteStatus" class="smart-paste-status"></p>
+      </section>
+
+      <section class="section-block" data-num="Ⅰ" data-step="第 1 步">
+        <h3>基础信息</h3>
+        <p class="section-tip">合同与附件的编号、日期。<strong>合同 / 附件日期都建议中俄各填一份</strong>，俄文里月份要写成 <code>января / февраля / марта ...</code>，英文用 <code>04 of June 2026</code> 这种格式。</p>
+        <div class="tip-list">
+          <span class="tip-list-title">这一节填什么</span>
+          <ol>
+            <li><b>合同编号</b>：例如 <code>GOF-04/06-26-CHN</code>。</li>
+            <li><b>附件编号</b>：通常是 <code>1</code>。</li>
+            <li><b>合同日期</b> & <b>附件日期</b>：俄文、英文各一份。</li>
+          </ol>
+        </div>
+        <div class="grid">
+          <label>合同编号<input name="contract_no" autocomplete="off" placeholder="例：GOF-04/06-26-CHN"></label>
+          <label>附件编号<input name="appendix_no" placeholder="例：1"></label>
+          <label>合同日期（俄文）<input name="contract_date_ru" placeholder="例：«04» июня 2026 г."></label>
+          <label>合同日期（英文）<input name="contract_date_en" placeholder="例：04 of June 2026"></label>
+          <label>附件日期（俄文）<input name="appendix_date_ru" placeholder="例：«04» июня 2026 г."></label>
+          <label>附件日期（英文）<input name="appendix_date_en" placeholder="例：04 of June 2026"></label>
+        </div>
+      </section>
+
+        </div>
+
+        <div class="wizard-step" data-wizard-step="2" data-wizard-title="买卖双方">
+          <div class="wizard-step-title">买卖双方</div>
+          <div class="wizard-step-subtitle">填写买方（俄方进口商）和卖方（中方出口商）的公司、地址、联系方式和签字代表。</div>
+
+      <section class="section-block" data-num="Ⅱ" data-step="第 2 步 · 买方">
+        <h3>买方信息</h3>
+        <p class="section-tip"><strong>买方 = Покупатель</strong>，通常是俄罗斯/独联体进口商。每个字段建议同时填俄英双语，俄文不会写可暂留空，PDF 中会以下划线占位。</p>
+        <div class="tip-list">
+          <span class="tip-list-title">必填项目</span>
+          <ul>
+            <li><b>名称（俄/英）</b>：公司全称，对应模板第 1 段抬头。</li>
+            <li><b>法定名称（俄文）</b>：营业执照上的完整法人名。</li>
+            <li><b>地址</b>、<b>电话/邮箱</b>、<b>装运通知联系方式</b>、<b>邮寄地址</b>。</li>
+            <li><b>代表 / 签字名</b>：俄、英各一份。</li>
+          </ul>
+        </div>
+        <div class="grid">
+          <label>买方名称（俄文）<input name="buyer_name_ru"></label>
+          <label>买方名称（英文）<input name="buyer_name_en"></label>
+          <label class="wide">买方完整法定名称（俄文）<textarea name="buyer_full_name_ru" rows="2"></textarea></label>
+          <label class="wide">买方地址（俄文）<textarea name="buyer_address_ru" rows="2"></textarea></label>
+          <label class="wide">买方地址（英文）<textarea name="buyer_address_en" rows="2"></textarea></label>
+          <label>买方电话<input name="buyer_tel"></label>
+          <label>买方邮箱<input name="buyer_email"></label>
+          <label>装运通知电话/传真<input name="buyer_notice_tel"></label>
+          <label>装运通知邮箱<input name="buyer_notice_email"></label>
+          <label class="wide">买方邮寄地址（俄文）<textarea name="buyer_postal_ru" rows="2"></textarea></label>
+          <label class="wide">买方邮寄地址（英文）<textarea name="buyer_postal_en" rows="2"></textarea></label>
+          <label>买方代表（俄文）<input name="buyer_representative_ru"></label>
+          <label>买方代表（英文）<input name="buyer_representative_en"></label>
+          <label>买方签字名（俄文）<input name="buyer_signature_ru"></label>
+          <label>买方签字名（英文）<input name="buyer_signature_en"></label>
+        </div>
+      </section>
+
+      <section class="section-block" data-num="Ⅲ" data-step="第 2 步 · 卖方">
+        <h3>卖方信息</h3>
+        <p class="section-tip"><strong>卖方 = Продавец</strong>，通常是中国出口商。卖方名称用一个字段（公司名一般中英一致），地址俄/英两栏分开填。</p>
+        <div class="grid">
+          <label class="wide">卖方名称<input name="seller_name" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO.,LTD"></label>
+          <label class="wide">卖方地址（俄文）<textarea name="seller_address_ru" rows="2"></textarea></label>
+          <label class="wide">卖方地址（英文）<textarea name="seller_address_en" rows="2"></textarea></label>
+          <label>卖方电话<input name="seller_tel"></label>
+          <label>卖方邮箱<input name="seller_email"></label>
+          <label>卖方代表（俄文）<input name="seller_representative_ru"></label>
+          <label>卖方代表（英文）<input name="seller_representative_en"></label>
+        </div>
+      </section>
+
+        </div>
+
+        <div class="wizard-step" data-wizard-step="3" data-wizard-title="银行商品">
+          <div class="wizard-step-title">银行与商品</div>
+          <div class="wizard-step-subtitle">填写卖方收款银行、可选买方银行、附件商品明细和交付/总价字段。</div>
+
+      <details class="section-block" data-num="Ⅳ" data-step="第 3 步 · 卖方银行" open>
+        <summary>卖方收款银行</summary>
+        <p class="section-tip"><strong>这是收外汇的卖方账户</strong>，必须与银行账户单一致。SWIFT 是 8 或 11 位字母数字（例如 <code>VTBRCNSH</code>）。</p>
+        <div class="grid details-grid">
+          <label>卖方银行（俄文）<input name="seller_bank_ru"></label>
+          <label>卖方银行（英文）<input name="seller_bank_en" placeholder="例：VTB Bank (PJSC) Shanghai Branch"></label>
+          <label class="wide">卖方银行地址（俄文）<textarea name="seller_bank_address_ru" rows="2"></textarea></label>
+          <label class="wide">卖方银行地址（英文）<textarea name="seller_bank_address_en" rows="2"></textarea></label>
+          <label>账户号<input name="seller_account_no" placeholder="例：40807156200610027979"></label>
+          <label>SWIFT<input name="seller_swift" placeholder="例：VTBRCNSH"></label>
+          <label class="wide">收款人名称<input name="seller_beneficiary"></label>
+        </div>
+      </details>
+
+      <details class="section-block" data-num="Ⅴ" data-step="可选">
+        <summary>买方银行（可选）</summary>
+        <p class="section-tip">如果合同里不需要写买方付款行，可以全部留空，PDF 会自动以下划线占位。</p>
+        <div class="grid details-grid">
+          <label>买方银行（俄文）<input name="buyer_bank_ru"></label>
+          <label>买方银行（英文）<input name="buyer_bank_en"></label>
+          <label class="wide">买方银行地址（俄文）<textarea name="buyer_bank_address_ru" rows="2"></textarea></label>
+          <label class="wide">买方银行地址（英文）<textarea name="buyer_bank_address_en" rows="2"></textarea></label>
+          <label>买方账户号<input name="buyer_account_no"></label>
+          <label>买方 SWIFT<input name="buyer_swift"></label>
+          <label>买方银行对应账户<input name="buyer_corr_account"></label>
+          <label>买方银行 BIC<input name="buyer_bic"></label>
+        </div>
+      </details>
+
+      <details class="section-block" data-num="Ⅵ" data-step="第 3 步 · 商品">
+        <summary>附件商品信息（可选）</summary>
+        <p class="section-tip"><strong>附件商品明细表</strong>。点击右侧「添加新产品」可以增加多行；不需要明细时整个 section 可留空。</p>
+        <div class="tip-list">
+          <span class="tip-list-title">每行需要填的列</span>
+          <ul>
+            <li><b>商品名称（俄/英）</b>、<b>规格</b>、<b>单价</b>、<b>数量</b>、<b>金额</b></li>
+            <li>金额可以不填，让模板的公式自动计算（如果模板支持）</li>
+          </ul>
+        </div>
+        <input type="hidden" name="goods_items_json" id="goodsItemsJson">
+        <div class="goods-tools">
+          <p>可添加多项商品。导出 PDF 时，每项会自动生成一行；不需要的行点 × 删除即可。</p>
+          <button type="button" id="addGoodsBtn" class="ghost">+ 添加新产品</button>
+        </div>
+        <div id="goodsItems" class="goods-items"></div>
+        <div class="grid details-grid">
+          <label class="wide">供货清单（俄文）<textarea name="package_includes_ru" rows="2"></textarea></label>
+          <label class="wide">供货清单（英文）<textarea name="package_includes_en" rows="2"></textarea></label>
+          <label class="wide">总价大写（俄文）<input name="total_price_ru"></label>
+          <label class="wide">总价大写（英文）<input name="total_price_en"></label>
+          <label>交付条件（俄文）<input name="delivery_terms_ru" placeholder="例：FCA Шанхай Инкотермс 2020"></label>
+          <label>交付条件（英文）<input name="delivery_terms_en" placeholder="例：FCA Shanghai Incoterms 2020"></label>
+          <label>交付时间（俄文）<input name="delivery_time_ru"></label>
+          <label>交付时间（英文）<input name="delivery_time_en"></label>
+        </div>
+      </details>
+
+        </div>
+
+        <div class="wizard-step" data-wizard-step="4" data-wizard-title="附件签字">
+          <div class="wizard-step-title">附件条款与签字</div>
+          <div class="wizard-step-subtitle">填写附件抬头、第 4–8 节自由条款和买卖双方签字位。确认后生成 PDF。</div>
+
+      <details class="section-block" data-num="Ⅶ" data-step="附件 · 抬头" open>
+        <summary>附件抬头与卖方陈述（模板"开始 / Form start"区域）</summary>
+        <p class="section-tip">附件首页的标题、卖方声明区。<strong>大多数情况按默认即可</strong>，只在客户有特殊要求时才修改。</p>
+        <div class="grid details-grid">
+          <label>附件编号 №<input name="form_appendix_no" placeholder="例：1"></label>
+          <label>合同编号 №<input name="form_contract_no" placeholder="例：GOF040626CHN"></label>
+          <label>附件日（俄文）<input name="form_appendix_day_ru" placeholder="例：04"></label>
+          <label>附件月（俄文）<input name="form_appendix_month_ru" placeholder="例：июня"></label>
+          <label>附件年（俄文）<input name="form_appendix_year_ru" placeholder="例：26"></label>
+          <label>合同日（俄文）<input name="form_contract_day_ru" placeholder="例：04"></label>
+          <label>合同月（俄文）<input name="form_contract_month_ru" placeholder="例：июня"></label>
+          <label>合同年（俄文）<input name="form_contract_year_ru" placeholder="例：26"></label>
+          <label>附件日期（英文）<input name="form_appendix_date_en" placeholder="例：04 June"></label>
+          <label>附件年（英文）<input name="form_appendix_year_en" placeholder="例：26"></label>
+          <label>合同编号（英文）<input name="form_contract_no_en" placeholder="可留空"></label>
+          <label>合同日期（英文）<input name="form_contract_date_en" placeholder="例：04 June"></label>
+          <label>合同年（英文）<input name="form_contract_year_en" placeholder="例：26"></label>
+          <label class="wide">卖方公司名称（俄文）<input name="form_seller_name_ru"></label>
+          <label class="wide">卖方公司名称（英文）<input name="form_seller_name_en"></label>
+          <label>卖方注册国家（俄文）<input name="form_seller_country_ru" placeholder="例：КНР"></label>
+          <label>卖方注册国家（英文）<input name="form_seller_country_en" placeholder="例：PRC"></label>
+          <label>卖方法人代表（俄文）<input name="form_seller_director_ru"></label>
+          <label>卖方法人代表（英文）<input name="form_seller_director_en"></label>
+        </div>
+      </details>
+
+      <details class="section-block" data-num="Ⅷ" data-step="附件 · 条款">
+        <summary>附件第 4–8 节自由填写</summary>
+        <p class="section-tip">如果第 4–8 节有自定义内容，按对应字段写中俄文；空着会沿用模板原文。</p>
+        <div class="grid details-grid">
+          <label class="wide">4. 交付条件（俄文）<textarea name="form_delivery_terms_ru" rows="2"></textarea></label>
+          <label class="wide">4. 交付条件（英文）<textarea name="form_delivery_terms_en" rows="2"></textarea></label>
+          <label class="wide">5. 交付时间（俄文）<textarea name="form_delivery_time_ru" rows="2"></textarea></label>
+          <label class="wide">5. 交付时间（英文）<textarea name="form_delivery_time_en" rows="2"></textarea></label>
+          <label class="wide">6. 付款条件（俄文）<textarea name="form_payment_terms_ru" rows="3"></textarea></label>
+          <label class="wide">6. 付款条件（英文）<textarea name="form_payment_terms_en" rows="3"></textarea></label>
+          <label class="wide">7. 单据清单（俄文）<textarea name="form_shipping_docs_ru" rows="3"></textarea></label>
+          <label class="wide">7. 单据清单（英文）<textarea name="form_shipping_docs_en" rows="3"></textarea></label>
+          <label class="wide">8. 技术验收（俄文）<textarea name="form_acceptance_ru" rows="2"></textarea></label>
+          <label class="wide">8. 技术验收（英文）<textarea name="form_acceptance_en" rows="2"></textarea></label>
+        </div>
+      </details>
+
+      <details class="section-block" data-num="Ⅸ" data-step="附件 · 签字">
+        <summary>附件双方签字</summary>
+        <p class="section-tip">附件最后买卖双方签字栏的姓名 / 职务、签字名。</p>
+        <div class="grid details-grid">
+          <label>买方签字代表<input name="form_buyer_signer_ru" placeholder="姓名 / 职务"></label>
+          <label>买方签字（姓名拼写）<input name="form_buyer_signature_ru"></label>
+          <label>卖方签字代表<input name="form_seller_signer_ru" placeholder="姓名 / 职务"></label>
+          <label>卖方签字（姓名拼写）<input name="form_seller_signature_ru"></label>
+        </div>
+      </details>
+
+        </div>
+      </div>
+
+      <div class="wizard-nav">
+        <div class="wizard-nav-left">
+          <button type="button" class="wizard-btn wizard-btn-prev" onclick="Wizard.prev()">上一步</button>
+          <span id="status" class="wizard-status"></span>
+        </div>
+        <div class="wizard-nav-right">
+          <button type="button" class="wizard-btn wizard-btn-next" onclick="Wizard.next()">下一步</button>
+          <button id="submitBtn" type="submit" class="wizard-btn wizard-btn-generate">生成并下载 PDF</button>
+        </div>
+      </div>
+    </form>
+
+    <aside class="preview panel">
+      <h2>实时填写预览</h2>
+      <p>这里只展示主要替换字段，最终 PDF 以新 Word 模板排版为准。</p>
+      <div id="previewList" class="preview-list"></div>
+      <div class="notice">
+        <strong>填写常见疑问</strong>
+        <p>① 公司名所有字母原样保留，不要全角；② 俄文月份用 <code>января / февраля / ...</code>；③ 商品行如果没明细可全部留空。</p>
+      </div>
+      <div class="notice">
+        <strong>已保留的填写内容</strong>
+        <p>智能粘贴区、全部原字段、<code>goodsItems</code> 商品多行、<code>addGoodsBtn</code> 添加按钮、<code>goods_items_json</code> 隐藏字段和原 <code>app.js</code> 提交逻辑均保留。</p>
+      </div>
+      <div class="help-card">
+        <strong>跳转其他页面</strong>
+        <ul>
+          <li>第一份：<a href="http://127.0.0.1:8088/">委托代理协议</a></li>
+          <li>第三份：<a href="http://127.0.0.1:8091/">附件2</a></li>
+          <li>第四份：<a href="http://127.0.0.1:8092/">代理出口结算协议</a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+  <script src="/wizard.js"></script>
+</body>
+</html>

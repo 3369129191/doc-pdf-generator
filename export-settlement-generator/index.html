@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>代理出口结算协议 PDF 自动生成</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/wizard.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Cross-border Contract Automation · 第四份文件</p>
+      <h1>代理出口结算协议 PDF 智能生成台</h1>
+      <p class="summary">这套协议规定的是「中方代收外汇」的关系：甲方委托乙方代办出口结算业务。原页面所有填写项、动态商品明细、PDF 生成方式均保留，仅将版面整理成与第六、第七份文件一致的逐步填写版式。</p>
+      <div class="page-switch">
+        <a href="http://127.0.0.1:8088/">委托代理协议</a>
+        <a href="http://127.0.0.1:8089/">俄英贸易合同</a>
+        <a href="http://127.0.0.1:8091/">附件2</a>
+        <a class="active" href="http://127.0.0.1:8092/">当前：代理出口结算协议</a>
+        <a href="http://127.0.0.1:8093/">应付账款垫付协议</a>
+        <a href="http://127.0.0.1:8094/">垫付申请书与承诺函</a>
+        <a href="http://127.0.0.1:8095/">付款保函</a>
+        <a href="http://127.0.0.1:8090/">合并生成页</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span>模板来源</span>
+      <strong>【代理出口结算协议】中方代收（中俄）.docx</strong>
+      <small>保留 Word 原始版式，仅替换你填写的字段，未填字段自动以下划线占位。</small>
+    </div>
+  </header>
+
+  <div class="steps-strip">
+    <div class="step-pill"><div class="num">1</div><div><div class="label">协议头</div><div class="desc">编号 / 签订日期 / 签订地点</div></div></div>
+    <div class="step-pill"><div class="num">2</div><div><div class="label">甲乙双方</div><div class="desc">委托方 + 出口代理方公司信息</div></div></div>
+    <div class="step-pill"><div class="num">3</div><div><div class="label">费率 · 账户</div><div class="desc">代理费率、年化、收款账户、控制人</div></div></div>
+    <div class="step-pill"><div class="num">4</div><div><div class="label">签署 · 生成</div><div class="desc">商品明细、签署日期 → 生成 PDF</div></div></div>
+  </div>
+
+  <main class="layout wizard-shell">
+    <form id="settlementForm" class="panel wizard-container" method="post" action="/generate">
+      <div class="panel-head">
+        <div>
+          <h2>填写信息</h2>
+          <p>所有字段都已经预填模板默认值，只改你要变的内容；不改的字段会沿用 Word 原文。原来的动态商品行和 PDF 生成逻辑保持不变。</p>
+        </div>
+        <button type="button" id="resetBtn" class="ghost">恢复模板默认值</button>
+      </div>
+
+      <div class="wizard-progress">
+        <div class="wizard-progress-header">
+          <div class="wizard-progress-title">Export Settlement Agreement Workflow</div>
+          <div class="wizard-progress-counter"><span class="wizard-progress-text">步骤 1 / 4</span></div>
+        </div>
+        <div class="wizard-progress-track"><div class="wizard-progress-bar" style="width:25%"></div></div>
+        <div class="wizard-indicator"></div>
+      </div>
+
+      <div class="wizard-content">
+        <div class="wizard-step" data-wizard-step="1" data-wizard-title="协议头">
+          <div class="wizard-step-title">协议头</div>
+          <div class="wizard-step-subtitle">协议第一页最顶部的三行：编号、签订日期、签订地点。日期与地点同时填写中俄文，PDF 会显示为「中文 / Русский」格式。</div>
+
+          <section class="section-block" data-num="Ⅰ" data-step="第 1 步">
+            <h3>协议头</h3>
+            <p class="section-tip">协议第一页最顶部的三行：编号、签订日期、签订地点。<strong>日期与地点同时填写中俄文</strong>，PDF 会显示为「中文 / Русский」格式。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">这一节填什么</span>
+              <ol>
+                <li><b>协议编号</b>：例如 <code>DLJC-2026-001</code>。</li>
+                <li><b>签订日期</b>：中文 + 俄文各一份。</li>
+                <li><b>签订地点</b>：城市名，中俄各一份。</li>
+              </ol>
+            </div>
+            <div class="grid">
+              <label>协议编号<input name="contract_no" placeholder="例：DLJC-2026-001"></label>
+              <label>签订日期（中文）<input name="sign_date_zh" placeholder="例：2026年6月17日"></label>
+              <label>签订日期（俄文）<input name="sign_date_ru" placeholder="例：17 июня 2026 г."></label>
+              <label>签订地点（中文）<input name="sign_place_zh" placeholder="例：上海"></label>
+              <label class="wide">签订地点（俄文）<input name="sign_place_ru" placeholder="例：Шанхай"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="2" data-wizard-title="甲乙双方">
+          <div class="wizard-step-title">甲乙双方</div>
+          <div class="wizard-step-subtitle">填写委托方（甲方）与出口代理方（乙方）信息。中文必填；俄文如不会翻译可暂留空，PDF 中会以下划线占位。</div>
+
+          <section class="section-block" data-num="Ⅱ" data-step="第 2 步 · 甲方">
+            <h3>委托方（甲方）信息</h3>
+            <p class="section-tip"><strong>甲方 = 委托别人帮忙出口的人/公司</strong>，通常是有货物要卖出口的中国公司。中文必填；俄文如不会翻译可暂留空，PDF 中会以下划线占位。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">逐项填写指引</span>
+              <ul>
+                <li><b>公司名称</b>：营业执照上的全称（中、俄各一份）</li>
+                <li><b>统一社会信用代码</b>：18 位编码（俄文版可与中文一致）</li>
+                <li><b>地址 / 联系人 / 电话 / 邮箱</b>：中、俄各一份</li>
+              </ul>
+            </div>
+            <div class="grid">
+              <label>甲方公司名称（中文）<input name="partyA_name_zh" placeholder="例：上海某某进出口有限公司"></label>
+              <label>甲方公司名称（俄文）<input name="partyA_name_ru" placeholder="例：Шанхайская внешнеторговая компания"></label>
+              <label>统一社会信用代码<input name="partyA_credit_code" placeholder="例：91310000XXXXXXXX0A"></label>
+              <label>统一社会信用代码（俄文版）<input name="partyA_credit_code_ru" placeholder="可与中文版相同"></label>
+              <label class="wide">联系地址（中文）<textarea name="partyA_address_zh" rows="2"></textarea></label>
+              <label class="wide">联系地址（俄文）<textarea name="partyA_address_ru" rows="2"></textarea></label>
+              <label>联系人（中文）<input name="partyA_contact_zh" placeholder="例：张三"></label>
+              <label>联系人（俄文）<input name="partyA_contact_ru" placeholder="例：Чжан Сань"></label>
+              <label>电话<input name="partyA_tel" placeholder="例：+86 21 5xxx xxxx"></label>
+              <label>电话（俄文版）<input name="partyA_tel_ru" placeholder="可与中文版相同"></label>
+              <label>邮箱<input name="partyA_email" placeholder="例：partyA@example.com"></label>
+              <label>邮箱（俄文版）<input name="partyA_email_ru" placeholder="可与中文版相同"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅲ" data-step="第 2 步 · 乙方">
+            <h3>出口代理方（乙方）信息</h3>
+            <p class="section-tip"><strong>乙方 = 替甲方做出口代理 / 收外汇的人/公司</strong>。统一信用代码、地址、联系人都建议填，便于法律核验。</p>
+            <div class="grid">
+              <label>乙方公司名称（中文）<input name="partyB_name_zh" placeholder="例：某某外贸服务有限公司"></label>
+              <label>乙方公司名称（俄文）<input name="partyB_name_ru" placeholder="例：ООО «Внешнеторговый агент ...»"></label>
+              <label>统一社会信用代码<input name="partyB_credit_code"></label>
+              <label>统一社会信用代码（俄文版）<input name="partyB_credit_code_ru"></label>
+              <label class="wide">联系地址（中文）<textarea name="partyB_address_zh" rows="2"></textarea></label>
+              <label class="wide">联系地址（俄文）<textarea name="partyB_address_ru" rows="2"></textarea></label>
+              <label>联系人（中文）<input name="partyB_contact_zh"></label>
+              <label>联系人（俄文）<input name="partyB_contact_ru"></label>
+              <label>电话<input name="partyB_tel"></label>
+              <label>电话（俄文版）<input name="partyB_tel_ru"></label>
+              <label>邮箱<input name="partyB_email"></label>
+              <label>邮箱（俄文版）<input name="partyB_email_ru"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="3" data-wizard-title="费率 · 账户">
+          <div class="wizard-step-title">代理费率、账户与实际控制人</div>
+          <div class="wizard-step-subtitle">协议核心金额条款。比例字段只填数字，不要带 %。账户信息会写入第 IV 节中俄两版。</div>
+
+          <section class="section-block" data-num="Ⅳ" data-step="第 3 步">
+            <h3>代理费率、账户与实际控制人</h3>
+            <p class="section-tip"><strong>这是协议的核心金额条款，非常关键</strong>。比例字段只填数字，不要带 <code>%</code>。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">必填四组数据</span>
+              <ol>
+                <li><b>代理费比例</b>（按收汇金额 % 计）+ <b>单笔最低代理费</b>（CNY）</li>
+                <li><b>代垫资金占用年化</b>（垫付货款时按这个利率计息）</li>
+                <li><b>甲方收款账户</b>：公司名 + 开户行 + 账号</li>
+                <li><b>乙方实际控制人姓名</b>（承担连带担保）</li>
+              </ol>
+            </div>
+            <div class="grid">
+              <label>代理费比例（%）<input name="fee_percent" placeholder="例：1.2"></label>
+              <label>单笔最低代理费（CNY）<input name="fee_min_cny" placeholder="例：5000"></label>
+              <label>代垫资金占用年化（%）<input name="annual_rate_percent" placeholder="例：8"></label>
+              <label>甲方收款账户：公司名称<input name="account_company" placeholder="例：上海某某进出口有限公司"></label>
+              <label>甲方收款账户：开户行<input name="account_bank" placeholder="例：中国工商银行上海分行营业部"></label>
+              <label class="wide">甲方收款账户：账号<input name="account_no" placeholder="例：1001 1234 5678 9012 345"></label>
+              <label class="wide">乙方实际控制人姓名<input name="partyB_controller" placeholder="例：李四"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="4" data-wizard-title="签署 · 生成">
+          <div class="wizard-step-title">签署日期与商品明细</div>
+          <div class="wizard-step-subtitle">协议末尾甲乙双方签字旁的日期，以及协议正文末尾的商品表（最多 5 行，可选）。确认后生成 PDF。</div>
+
+          <section class="section-block" data-num="Ⅴ" data-step="第 4 步 · 签署">
+            <h3>签署日期</h3>
+            <p class="section-tip">协议末尾甲乙双方签字旁的日期。<strong>填阿拉伯数字即可</strong>，俄文段会自动转成 <code>июня</code> 等单词。</p>
+            <div class="grid">
+              <label>年<input name="sign_year" placeholder="例：2026"></label>
+              <label>月<input name="sign_month" placeholder="例：6"></label>
+              <label>日<input name="sign_day" placeholder="例：17"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅵ" data-step="可选">
+            <h3>批次商品明细（可选）</h3>
+            <p class="section-tip">协议正文末尾有一张商品表（最多 5 行）。<strong>如还没确定具体商品，可全部留空</strong>，PDF 中表格会以下划线占位。</p>
+            <div class="grid">
+              <label class="wide">货物品名（中文，协议框架描述）<input name="goods_summary_zh" placeholder="例：消费电子、家居用品等"></label>
+              <label class="wide">货物品名（俄文）<input name="goods_summary_ru" placeholder="例：потребительская электроника, товары для дома"></label>
+            </div>
+            <div id="goods-list"></div>
+            <button type="button" id="add-good" class="ghost" style="margin-top:12px;margin-left:32px">+ 添加一行商品</button>
+          </section>
+        </div>
+      </div>
+
+      <div class="wizard-nav">
+        <div class="wizard-nav-left">
+          <button type="button" class="wizard-btn wizard-btn-prev" onclick="Wizard.prev()">上一步</button>
+          <span id="status" class="wizard-status"></span>
+        </div>
+        <div class="wizard-nav-right">
+          <button type="button" class="wizard-btn wizard-btn-next" onclick="Wizard.next()">下一步</button>
+          <button type="submit" class="wizard-btn wizard-btn-generate" id="generate-btn">生成 PDF</button>
+        </div>
+      </div>
+    </form>
+
+    <aside class="preview panel">
+      <h2>实时填写预览</h2>
+      <p>这里只展示主要替换字段，最终 PDF 以 Word 模板排版为准。</p>
+      <div id="previewList" class="preview-list"></div>
+      <div class="notice">
+        <strong>填写常见疑问</strong>
+        <p>① 协议编号会同时出现在中俄文标题后；② 比例字段只填数字（如 <code>1.2</code>，不要带 %）；③ 俄文公司信息可与中文一致，也可留空；④ 商品明细表最多支持 5 行。</p>
+      </div>
+      <div class="notice">
+        <strong>已保留的填写内容</strong>
+        <p>协议编号、签订日期/地点、甲乙双方公司中俄文 + 信用代码 + 地址 + 联系人 + 电话 + 邮箱、代理费率/最低代理费/年化、甲方收款账户、乙方实际控制人、签署日期、货物品名、动态商品明细行（含「+ 添加一行商品」）。</p>
+      </div>
+      <div class="help-card">
+        <strong>跳转其他页面</strong>
+        <ul>
+          <li>第一份：<a href="http://127.0.0.1:8088/">委托代理协议</a></li>
+          <li>第二份：<a href="http://127.0.0.1:8089/">俄英贸易合同</a></li>
+          <li>第三份：<a href="http://127.0.0.1:8091/">附件2</a></li>
+          <li>第五份：<a href="http://127.0.0.1:8093/">应付账款垫付协议</a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+  <script src="/wizard.js"></script>
+</body>
+</html>

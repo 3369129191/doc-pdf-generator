@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>合并生成页 - 7 份文档一键生成</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/wizard.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">合同自动生成 · 7 合 1 合并工具</p>
+      <h1>跨境合同套件 — 一次性生成全部 7 份 PDF</h1>
+      <p class="summary">一份表单填写所有合同所需的共同数据，自动分发到 7 份独立文档模板中，一键生成并打包下载。所有字段均留有双语输入空间，不会填的字段留空即可。</p>
+      <div class="page-switch">
+        <a href="http://127.0.0.1:8088/">委托代理协议</a>
+        <a href="http://127.0.0.1:8089/">俄英贸易合同</a>
+        <a href="http://127.0.0.1:8091/">附件2</a>
+        <a href="http://127.0.0.1:8092/">代理出口结算协议</a>
+        <a href="http://127.0.0.1:8093/">应付账款垫付协议</a>
+        <a href="http://127.0.0.1:8094/">垫付申请书与承诺函</a>
+        <a href="http://127.0.0.1:8095/">付款保函</a>
+        <a class="active" href="http://127.0.0.1:8090/">当前：合并生成页</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span>合并生成套件</span>
+      <strong>一次性生成 7 份 PDF</strong>
+      <small>按向导分步填写，每步对应一份文档。填写完毕后一键生成全部 PDF 并打包为 ZIP 下载。</small>
+    </div>
+  </header>
+
+  <div class="steps-strip">
+    <div class="step-pill"><div class="num">0</div><div><div class="label">公共信息</div><div class="desc">跨文档共享字段 / 一次填写自动同步</div></div></div>
+    <div class="step-pill"><div class="num">1</div><div><div class="label">委托代理协议</div><div class="desc">协议号 / 签订日期 / 三方公司信息 / 账户</div></div></div>
+    <div class="step-pill"><div class="num">2</div><div><div class="label">俄英贸易合同</div><div class="desc">合同号 / 买卖双方 / 货物价格 / 付款交货</div></div></div>
+    <div class="step-pill"><div class="num">3</div><div><div class="label">附件2</div><div class="desc">合同号 / 买卖双方 / 货物价格 / 付款条款</div></div></div>
+    <div class="step-pill"><div class="num">4</div><div><div class="label">代理出口结算协议</div><div class="desc">协议编号 / 双方信息 / 费率 / 结算账户</div></div></div>
+    <div class="step-pill"><div class="num">5</div><div><div class="label">应付账款垫付协议</div><div class="desc">协议编号 / 双方信息 / 费率 / 服务期限</div></div></div>
+    <div class="step-pill"><div class="num">6</div><div><div class="label">垫付申请书与承诺函</div><div class="desc">收件人 / 垫付金额 / 贸易信息 / 账户</div></div></div>
+    <div class="step-pill"><div class="num">7</div><div><div class="label">付款保函</div><div class="desc">保函编号 / 受益人 / 担保人 / 交单行</div></div></div>
+  </div>
+
+  <main class="layout wizard-shell">
+    <form id="combinedForm" class="panel wizard-container" method="post" action="/generate">
+      <div class="panel-head">
+        <div>
+          <h2>填写信息</h2>
+          <p>所有字段都已经预填模板默认值，只改你要变的内容；不填的字段会沿用原 Word 文档原文。完成全部 7 个步骤后，点击底部「生成全部 7 份 PDF」一键打包下载。</p>
+        </div>
+        <button type="button" id="resetBtn" class="ghost">恢复模板默认值</button>
+      </div>
+
+      <div class="wizard-progress">
+        <div class="wizard-progress-header">
+          <div class="wizard-progress-title">Combined Document Generator — 8-in-1 Workflow</div>
+          <div class="wizard-progress-counter"><span class="wizard-progress-text">步骤 1 / 8</span></div>
+        </div>
+        <div class="wizard-progress-track"><div class="wizard-progress-bar" style="width:12.5%"></div></div>
+        <div class="wizard-indicator"></div>
+      </div>
+
+      <div class="wizard-content">
+        <div class="wizard-step" data-wizard-step="0" data-wizard-title="公共信息">
+          <div class="wizard-step-title">公共信息</div>
+          <div class="wizard-step-subtitle">以下字段在多份文档中共享，只需填写一次即可自动同步到所有相关文档。带 <strong>*</strong> 标记的为建议填写字段。</div>
+
+          <!-- 卖方/乙方信息 -->
+          <section class="section-block" data-num="I" data-step="公共信息">
+            <h3>卖方/乙方信息</h3>
+            <p class="section-tip">卖方（乙方）的基本信息，将同步到委托代理协议、贸易合同、附件2、垫付申请书等。</p>
+            <div class="grid">
+              <label class="single">卖方公司英文名<input name="doc8088_party_b_name_en" autocomplete="off" type="text" data-shared-group="shared_seller_name_en" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO., LTD"></label>
+              <label class="single">卖方公司俄文名<input name="doc8089_seller_name" autocomplete="off" type="text" data-shared-group="shared_seller_name_ru" placeholder="例：ООО «Гуандун Ошуцзян»"></label>
+              <label class="wide">卖方法律地址(英文)<textarea name="doc8088_party_b_address" autocomplete="off" rows="2" data-shared-group="shared_seller_address_en" placeholder="例：Sicun Industrial, Heqing Town, Foshan, China"></textarea></label>
+              <label class="wide">卖方法律地址(俄文)<textarea name="doc8088_party_b_address_ru" autocomplete="off" rows="2" data-shared-group="shared_seller_address_ru" placeholder="例：пром. зона Сицунь, г. Хэцин, Фошань, КНР"></textarea></label>
+              <label class="single">卖方代表(英文)<input name="doc8088_party_b_representative" autocomplete="off" type="text" data-shared-group="shared_seller_representative_en" placeholder="例：Director - Zhang San"></label>
+              <label class="single">卖方代表(俄文)<input name="doc8088_party_b_representative_ru" autocomplete="off" type="text" data-shared-group="shared_seller_representative_ru" placeholder="例：Директор - Чжан Сань"></label>
+              <label class="single">卖方电话<input name="doc8089_seller_tel" autocomplete="off" type="text" data-shared-group="shared_seller_tel" placeholder="例：+86-757-12345678"></label>
+              <label class="single">卖方邮箱<input name="doc8089_seller_email" autocomplete="off" type="text" data-shared-group="shared_seller_email" placeholder="例：export@oshujian.com"></label>
+            </div>
+          </section>
+
+          <!-- 买方/甲方信息 -->
+          <section class="section-block" data-num="II" data-step="公共信息">
+            <h3>买方/甲方信息</h3>
+            <p class="section-tip">买方（甲方）的基本信息，将同步到委托代理协议、贸易合同、附件2、垫付协议、垫付申请书等。</p>
+            <div class="grid">
+              <label class="single">买方公司英文名<input name="doc8088_party_a_name_en" autocomplete="off" type="text" data-shared-group="shared_buyer_name_en" placeholder="例：AIRFLOT TECHNICS TH Ltd."></label>
+              <label class="single">买方公司俄文名<input name="doc8088_party_a_name_ru" autocomplete="off" type="text" data-shared-group="shared_buyer_name_ru" placeholder="例：АИРФЛОТ ТЕХНИКС ТХ"></label>
+              <label class="single">买方公司全称(俄文)<input name="doc8088_party_a_name_ru" autocomplete="off" type="text" data-shared-group="shared_buyer_full_name_ru" placeholder="例：ООО «Аэрфлот Техникс»"></label>
+              <label class="wide">买方法律地址(英文)<textarea name="doc8088_party_a_address" autocomplete="off" rows="2" data-shared-group="shared_buyer_address_en" placeholder="例：Polkovaya Street 3, bld.5, Moscow, RUSSIA"></textarea></label>
+              <label class="wide">买方法律地址(俄文)<textarea name="doc8088_party_a_address_ru" autocomplete="off" rows="2" data-shared-group="shared_buyer_address_ru" placeholder="例：125239, Москва, ул. Полковая, д. 3, стр.5"></textarea></label>
+              <label class="single">买方代表(英文)<input name="doc8088_party_a_representative" autocomplete="off" type="text" data-shared-group="shared_buyer_representative_en" placeholder="例：Director - Ivanov I.I."></label>
+              <label class="single">买方代表(俄文)<input name="doc8088_party_a_representative_ru" autocomplete="off" type="text" data-shared-group="shared_buyer_representative_ru" placeholder="例：Директор - Иванов И.И."></label>
+              <label class="single">买方电话<input name="doc8089_buyer_tel" autocomplete="off" type="text" data-shared-group="shared_buyer_tel" placeholder="例：+7-495-1234567"></label>
+              <label class="single">买方邮箱<input name="doc8089_buyer_email" autocomplete="off" type="text" data-shared-group="shared_buyer_email" placeholder="例：info@airflot.ru"></label>
+              <label class="single">买方通知电话<input name="doc8089_buyer_notice_tel" autocomplete="off" type="text" data-shared-group="shared_buyer_notice_tel" placeholder="例：+7-495-7654321"></label>
+              <label class="single">买方通知邮箱<input name="doc8089_buyer_notice_email" autocomplete="off" type="text" data-shared-group="shared_buyer_notice_email" placeholder="例：notice@airflot.ru"></label>
+            </div>
+          </section>
+
+          <!-- 丙方/智链通达信息 -->
+          <section class="section-block" data-num="III" data-step="公共信息">
+            <h3>丙方/智链通达信息</h3>
+            <p class="section-tip">代理方（丙方/智链通达）的基本信息，将同步到委托代理协议、结算协议、垫付协议、垫付申请书等。</p>
+            <div class="grid">
+              <label class="single">智链通达中文名<input name="doc8088_party_c_name_cn" autocomplete="off" type="text" data-shared-group="shared_agent_name_cn" placeholder="例：深圳智链通达科技有限公司"></label>
+              <label class="single">智链通达俄文名<input name="doc8088_party_c_name_ru" autocomplete="off" type="text" data-shared-group="shared_agent_name_ru" placeholder="例：ООО «СмартЧейн Нексус»"></label>
+              <label class="wide">智链通达地址(中文)<textarea name="doc8088_party_c_address" autocomplete="off" rows="2" data-shared-group="shared_agent_address_cn" placeholder="例：深圳市南山区科技园"></textarea></label>
+              <label class="wide">智链通达地址(俄文)<textarea name="doc8088_party_c_address_ru" autocomplete="off" rows="2" data-shared-group="shared_agent_address_ru" placeholder="例：г. Шэньчжэнь, район Наньшань"></textarea></label>
+              <label class="single">智链通达代表(中文)<input name="doc8088_party_c_representative" autocomplete="off" type="text" data-shared-group="shared_agent_representative_cn" placeholder="例：李四"></label>
+              <label class="single">智链通达代表(俄文)<input name="doc8088_party_c_representative_ru" autocomplete="off" type="text" data-shared-group="shared_agent_representative_ru" placeholder="例：Ли Сы"></label>
+              <label class="single">智链通达电话<input name="doc8093_partyA_tel" autocomplete="off" type="text" data-shared-group="shared_agent_tel" placeholder="例：+86-757-87654321"></label>
+              <label class="single">智链通达邮箱<input name="doc8093_partyA_email" autocomplete="off" type="text" data-shared-group="shared_agent_email" placeholder="例：contact@smartchain.com"></label>
+            </div>
+          </section>
+
+          <!-- 卖方银行信息 -->
+          <section class="section-block" data-num="IV" data-step="公共信息">
+            <h3>卖方银行信息</h3>
+            <p class="section-tip">卖方的收款银行信息，将同步到委托代理协议、贸易合同、附件2、垫付申请书等。</p>
+            <div class="grid">
+              <label class="single">卖方银行(英文)<input name="doc8088_party_b_bank" autocomplete="off" type="text" data-shared-group="shared_seller_bank_en" placeholder="例：Bank of China"></label>
+              <label class="single">卖方银行(俄文)<input name="doc8088_party_b_bank_ru" autocomplete="off" type="text" data-shared-group="shared_seller_bank_ru" placeholder="例：Банк Китая"></label>
+              <label class="single">卖方SWIFT<input name="doc8088_party_b_swift" autocomplete="off" type="text" data-shared-group="shared_seller_swift" placeholder="例：BKCHCNBJ"></label>
+              <label class="single">卖方收款人名称<input name="doc8088_party_b_account_name" autocomplete="off" type="text" data-shared-group="shared_seller_account_name" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO., LTD"></label>
+              <label class="single">卖方账号<input name="doc8088_party_b_account_no" autocomplete="off" type="text" data-shared-group="shared_seller_account_no" placeholder="例：1234567890"></label>
+              <label class="wide">卖方银行地址(英文)<textarea name="doc8088_party_b_bank_address" autocomplete="off" rows="2" data-shared-group="shared_seller_bank_address_en" placeholder="例：Foshan Branch, China"></textarea></label>
+              <label class="wide">卖方银行地址(俄文)<textarea name="doc8089_seller_bank_address_ru" autocomplete="off" rows="2" data-shared-group="shared_seller_bank_address_ru" placeholder="例：г. Фошань, Китай"></textarea></label>
+            </div>
+          </section>
+
+          <!-- 买方银行信息 -->
+          <section class="section-block" data-num="V" data-step="公共信息">
+            <h3>买方银行信息</h3>
+            <p class="section-tip">买方的银行信息，将同步到贸易合同、附件2等。</p>
+            <div class="grid">
+              <label class="single">买方银行(英文)<input name="doc8089_buyer_bank_en" autocomplete="off" type="text" data-shared-group="shared_buyer_bank_en" placeholder="例：SBERBANK"></label>
+              <label class="single">买方银行(俄文)<input name="doc8089_buyer_bank_ru" autocomplete="off" type="text" data-shared-group="shared_buyer_bank_ru" placeholder="例：СБЕРБАНК"></label>
+              <label class="single">买方SWIFT<input name="doc8089_buyer_swift" autocomplete="off" type="text" data-shared-group="shared_buyer_swift" placeholder="例：SABRRUMM"></label>
+              <label class="single">买方账号<input name="doc8089_buyer_account_no" autocomplete="off" type="text" data-shared-group="shared_buyer_account_no" placeholder="例：9876543210"></label>
+              <label class="single">买方BIC<input name="doc8089_buyer_bic" autocomplete="off" type="text" data-shared-group="shared_buyer_bic" placeholder="例：044525225"></label>
+              <label class="single">买方对应账户<input name="doc8089_buyer_corr_account" autocomplete="off" type="text" data-shared-group="shared_buyer_corr_account" placeholder="例：30101810400000000225"></label>
+              <label class="wide">买方银行地址(英文)<textarea name="doc8089_buyer_bank_address_en" autocomplete="off" rows="2" data-shared-group="shared_buyer_bank_address_en" placeholder="例：Moscow, Russia"></textarea></label>
+              <label class="wide">买方银行地址(俄文)<textarea name="doc8089_buyer_bank_address_ru" autocomplete="off" rows="2" data-shared-group="shared_buyer_bank_address_ru" placeholder="例：г. Москва, Россия"></textarea></label>
+            </div>
+          </section>
+
+          <!-- 合同编号与日期 -->
+          <section class="section-block" data-num="VI" data-step="公共信息">
+            <h3>合同编号与日期</h3>
+            <p class="section-tip">贸易合同编号和日期，将同步到委托代理协议、贸易合同、附件2、垫付申请书等。</p>
+            <div class="grid">
+              <label class="single">贸易合同编号<input name="doc8088_trade_contract_no" autocomplete="off" type="text" data-shared-group="shared_trade_contract_no" placeholder="例：THOS-SMA-2026-001"></label>
+              <label class="single">合同日期(俄文)<input name="doc8088_trade_contract_date_ru" autocomplete="off" type="text" data-shared-group="shared_trade_contract_date_ru" placeholder="例：16 июня 2026 г."></label>
+              <label class="single">合同日期(英文)<input name="doc8088_trade_contract_date_en" autocomplete="off" type="text" data-shared-group="shared_trade_contract_date_en" placeholder="例：June 16, 2026"></label>
+              <label class="single">附件编号<input name="doc8088_appendix_no" autocomplete="off" type="text" data-shared-group="shared_appendix_no" placeholder="例：2"></label>
+            </div>
+          </section>
+
+          <!-- 签署日期与地点 -->
+          <section class="section-block" data-num="VII" data-step="公共信息">
+            <h3>签署日期与地点</h3>
+            <p class="section-tip">签署日期和地点，将同步到结算协议、垫付协议等。</p>
+            <div class="grid">
+              <label class="single">签署日期(中文)<input name="doc8092_sign_date_zh" autocomplete="off" type="text" data-shared-group="shared_sign_date_zh" placeholder="例：2026年6月16日"></label>
+              <label class="single">签署日期(俄文)<input name="doc8092_sign_date_ru" autocomplete="off" type="text" data-shared-group="shared_sign_date_ru" placeholder="例：16 июня 2026 г."></label>
+              <label class="single">签署地点(中文)<input name="doc8088_sign_place" autocomplete="off" type="text" data-shared-group="shared_sign_place_zh" placeholder="例：中国香港"></label>
+              <label class="single">签署地点(俄文)<input name="doc8092_sign_place_ru" autocomplete="off" type="text" data-shared-group="shared_sign_place_ru" placeholder="例：ГОНКОНГ, КНР"></label>
+              <label class="single">签署年<input name="doc8092_sign_year" autocomplete="off" type="text" data-shared-group="shared_sign_year" placeholder="例：2026"></label>
+              <label class="single">签署月<input name="doc8092_sign_month" autocomplete="off" type="text" data-shared-group="shared_sign_month" placeholder="例：06"></label>
+              <label class="single">签署日<input name="doc8092_sign_day" autocomplete="off" type="text" data-shared-group="shared_sign_day" placeholder="例：16"></label>
+            </div>
+          </section>
+
+          <!-- 贸易条款 -->
+          <section class="section-block" data-num="VIII" data-step="公共信息">
+            <h3>贸易条款</h3>
+            <p class="section-tip">交付条件和时间，将同步到贸易合同、附件2等。</p>
+            <div class="grid">
+              <label class="single">交付条件(俄文)<input name="doc8089_delivery_terms_ru" autocomplete="off" type="text" data-shared-group="shared_delivery_terms_ru" placeholder="例：FOB Фошань, КНР"></label>
+              <label class="single">交付条件(英文)<input name="doc8089_delivery_terms_en" autocomplete="off" type="text" data-shared-group="shared_delivery_terms_en" placeholder="例：FOB Foshan, China"></label>
+              <label class="single">交付时间(俄文)<input name="doc8089_delivery_time_ru" autocomplete="off" type="text" data-shared-group="shared_delivery_time_ru" placeholder="例：в течение 60 дней"></label>
+              <label class="single">交付时间(英文)<input name="doc8089_delivery_time_en" autocomplete="off" type="text" data-shared-group="shared_delivery_time_en" placeholder="例：within 60 days"></label>
+            </div>
+          </section>
+
+          <!-- 付款条款 -->
+          <section class="section-block" data-num="IX" data-step="公共信息">
+            <h3>付款条款</h3>
+            <p class="section-tip">预付款和尾款比例，将同步到贸易合同、附件2等。</p>
+            <div class="grid">
+              <label class="single">预付款比例<input name="doc8089_payment_advance_percent" autocomplete="off" type="text" data-shared-group="shared_payment_advance_percent" placeholder="例：30%"></label>
+              <label class="single">尾款比例<input name="doc8089_payment_balance_percent" autocomplete="off" type="text" data-shared-group="shared_payment_balance_percent" placeholder="例：70%"></label>
+              <label class="single">预付款支付期限(天)<input name="doc8089_payment_bank_days" autocomplete="off" type="text" data-shared-group="shared_payment_bank_days" placeholder="例：5"></label>
+              <label class="single">发货前通知天数<input name="doc8089_delivery_notice_days" autocomplete="off" type="text" data-shared-group="shared_delivery_notice_days" placeholder="例：10"></label>
+            </div>
+          </section>
+
+        </div>
+
+        <div class="wizard-step" data-wizard-step="1" data-wizard-title="委托代理协议">
+          <div class="wizard-step-title">委托代理协议</div>
+          <div class="wizard-step-subtitle">请填写以下信息。带 <strong>*</strong> 标记的为建议填写字段，其余可选。</div>
+
+          <section class="section-block" data-num="I" data-step="第 1 步">
+            <h3>基础信息</h3>
+            <p class="section-tip">协议第一页最上方的三行：协议号、签订日期、签订地点。<strong>建议中俄文同时写入</strong>。</p>
+            <div class="grid">
+              <label class="single">协议号<input name="doc8088_agreement_no" autocomplete="off" type="text" placeholder="例：THOS-SMA"></label>
+              <label class="single">签订日期<input name="doc8088_sign_date" autocomplete="off" type="text" placeholder="例：2026年6月16日 / 16 июня 2026 г."></label>
+              <label class="wide">签订地点<input name="doc8088_sign_place" autocomplete="off" type="text" placeholder="例：中国香港 / ГОНКОНГ, КНР"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="II" data-step="第 2 步 · 甲方">
+            <h3>甲方信息（委托方）</h3>
+            <p class="section-tip"><strong>甲方 = 委托别人帮忙的一方</strong>，通常是俄方付款人/进口商。每一项都建议中俄双语。</p>
+            <div class="grid">
+              <label class="single">甲方英文名称<input name="doc8088_party_a_name_en" autocomplete="off" type="text" placeholder="例：AIRFLOT TECHNICS TH Ltd."></label>
+              <label class="single">甲方俄文名称<input name="doc8088_party_a_name_ru" autocomplete="off" type="text" placeholder="例：АИРФЛОТ ТЕХНИКС ТХ"></label>
+              <label class="wide">甲方法律地址<textarea name="doc8088_party_a_address" autocomplete="off" rows="3" placeholder="例：Polkovaya Street 3, bld.5, Moscow, RUSSIA"></textarea></label>
+              <label class="wide">甲方俄文地址<textarea name="doc8088_party_a_address_ru" autocomplete="off" rows="3" placeholder="例：125239, Москва, ул. Полковая, д. 3, стр.5"></textarea></label>
+              <label class="single">甲方代表<input name="doc8088_party_a_representative" autocomplete="off" type="text" placeholder="例：Director - Ivanov I.I."></label>
+              <label class="single">甲方俄文代表<input name="doc8088_party_a_representative_ru" autocomplete="off" type="text" placeholder="例：Директор - Иванов И.И."></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="III" data-step="第 2 步 · 乙方">
+            <h3>乙方信息（被委托方）</h3>
+            <p class="section-tip"><strong>乙方 = 提供服务/收外汇的一方</strong>，通常是中国出口商。</p>
+            <div class="grid">
+              <label class="single">乙方英文名称<input name="doc8088_party_b_name_en" autocomplete="off" type="text" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO., LTD"></label>
+              <label class="single">乙方俄文名称<input name="doc8088_party_b_name_ru" autocomplete="off" type="text" placeholder="例：ООО «Гуандун Ошуцзян Ферниче»"></label>
+              <label class="wide">乙方法律地址<textarea name="doc8088_party_b_address" autocomplete="off" rows="3" placeholder="例：Sicun Industrial, Heqing Town, Foshan, China"></textarea></label>
+              <label class="wide">乙方俄文地址<textarea name="doc8088_party_b_address_ru" autocomplete="off" rows="3" placeholder="例：пром. зона Сицунь, г. Хэцин, Фошань, КНР"></textarea></label>
+              <label class="single">乙方代表<input name="doc8088_party_b_representative" autocomplete="off" type="text" placeholder="例：Director - Zhang San"></label>
+              <label class="single">乙方俄文代表<input name="doc8088_party_b_representative_ru" autocomplete="off" type="text" placeholder="例：Директор - Чжан Сань"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="IV" data-step="第 3 步">
+            <h3>贸易合同与付款信息</h3>
+            <p class="section-tip">这部分关联另一份「贸易合同」。代理费比例只填数字（不带 <code>%</code>）。</p>
+            <div class="grid">
+              <label class="single">贸易合同号<input name="doc8088_trade_contract_no" autocomplete="off" type="text" placeholder="例：GOF-04/06-26-CHN"></label>
+              <label class="single">带 № 的贸易合同号<input name="doc8088_trade_contract_no_with_symbol" autocomplete="off" type="text" placeholder="例：№ GOF-04/06-26-CHN"></label>
+              <label class="single">贸易合同日期（英文）<input name="doc8088_trade_contract_date_en" autocomplete="off" type="text" placeholder="例：04.06.2026"></label>
+              <label class="single">贸易合同日期（俄文）<input name="doc8088_trade_contract_date_ru" autocomplete="off" type="text" placeholder="例：«04» июня 2026 г."></label>
+              <label class="single">附件编号<input name="doc8088_appendix_no" autocomplete="off" type="text" placeholder="例：1"></label>
+              <label class="single">代理费比例（%）<input name="doc8088_agent_fee_percent" autocomplete="off" type="text" placeholder="例：1.5"></label>
+              <label class="single">支付用途/货物中文<input name="doc8088_goods_cn" autocomplete="off" type="text" placeholder="例：家具"></label>
+              <label class="single">支付用途/货物俄文<input name="doc8088_goods_ru" autocomplete="off" type="text" placeholder="例：мебель"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="V" data-step="第 3 步 · 账户">
+            <h3>乙方收款账户</h3>
+            <p class="section-tip"><strong>这是乙方收外汇的账户</strong>，请确认开户行、SWIFT 和账户号与银行账户单一致。</p>
+            <div class="grid">
+              <label class="single">开户银行<input name="doc8088_party_b_bank" autocomplete="off" type="text" placeholder="例：VTB Bank (PJSC) Shanghai Branch"></label>
+              <label class="single">开户银行俄文<input name="doc8088_party_b_bank_ru" autocomplete="off" type="text" placeholder="例：ВТБ (ПАО) филиал в Шанхае"></label>
+              <label class="single">SWIFT<input name="doc8088_party_b_swift" autocomplete="off" type="text" placeholder="例：VTBRCNSH"></label>
+              <label class="single">账户号<input name="doc8088_party_b_account_no" autocomplete="off" type="text" placeholder="例：40807156200610027979"></label>
+              <label class="wide">银行地址<textarea name="doc8088_party_b_bank_address" autocomplete="off" rows="3" placeholder="例：100 Century Avenue, Pudong New District, Shanghai"></textarea></label>
+              <label class="wide">收款人名称<input name="doc8088_party_b_account_name" autocomplete="off" type="text" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO., LTD"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="VI" data-step="可选">
+            <h3>丙方信息（默认固定，可按需修改）</h3>
+            <p class="section-tip"><strong>除非有特殊要求</strong>，丙方信息保留模板默认值即可，无需修改。</p>
+            <div class="grid">
+              <label class="single">丙方中文名称<input name="doc8088_party_c_name_cn" autocomplete="off" type="text" ></label>
+              <label class="single">丙方俄文名称<input name="doc8088_party_c_name_ru" autocomplete="off" type="text" ></label>
+              <label class="wide">丙方法律地址<textarea name="doc8088_party_c_address" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">丙方俄文地址<textarea name="doc8088_party_c_address_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">丙方代表<input name="doc8088_party_c_representative" autocomplete="off" type="text" ></label>
+              <label class="single">丙方俄文代表<input name="doc8088_party_c_representative_ru" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="2" data-wizard-title="俄英贸易合同">
+          <div class="wizard-step-title">俄英贸易合同</div>
+          <div class="wizard-step-subtitle">请填写以下信息。带 <strong>*</strong> 标记的为建议填写字段，其余可选。</div>
+
+          <section class="section-block" data-num="I" data-step="第 1 步">
+            <h3>合同基础信息</h3>
+            <p class="section-tip">合同号、签订日期（中俄双语）、附件编号等基础信息。</p>
+            <div class="grid">
+              <label class="single">合同号<input name="doc8089_contract_no" autocomplete="off" type="text" placeholder="例：GOF-04/06-26-CHN"></label>
+              <label class="single">签订日期（俄文）<input name="doc8089_contract_date_ru" autocomplete="off" type="text" placeholder="例：«04» июня 2026 г."></label>
+              <label class="single">签订日期（英文）<input name="doc8089_contract_date_en" autocomplete="off" type="text" placeholder="例：04.06.2026"></label>
+              <label class="single">附件编号<input name="doc8089_appendix_no" autocomplete="off" type="text" placeholder="例：1"></label>
+              <label class="single">附件日期（俄文）<input name="doc8089_appendix_date_ru" autocomplete="off" type="text" placeholder="例：«04» июня 2026 г."></label>
+              <label class="single">附件日期（英文）<input name="doc8089_appendix_date_en" autocomplete="off" type="text" placeholder="例：04.06.2026"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="II" data-step="第 2 步 · 买方">
+            <h3>买方（Покупатель / Buyer）信息</h3>
+            <p class="section-tip">买方即进口商/俄方公司，填写全称、地址、联系方式及银行账户信息。</p>
+            <div class="grid">
+              <label class="single">买方俄文简称<input name="doc8089_buyer_name_ru" autocomplete="off" type="text" placeholder="例：ООО «АИРФЛОТ ТЕХНИКС ТХ»"></label>
+              <label class="single">买方英文简称<input name="doc8089_buyer_name_en" autocomplete="off" type="text" placeholder="例：AIRFLOT TECHNICS TH Ltd."></label>
+              <label class="single">买方俄文全称<input name="doc8089_buyer_full_name_ru" autocomplete="off" type="text" placeholder="例：Общество с ограниченной ответственностью «АИРФЛОТ ТЕХНИКС ТХ»"></label>
+              <label class="wide">买方俄文地址<textarea name="doc8089_buyer_address_ru" autocomplete="off" rows="3" placeholder="例：125239, Москва, ул. Полковая, д. 3, стр. 5"></textarea></label>
+              <label class="wide">买方英文地址<textarea name="doc8089_buyer_address_en" autocomplete="off" rows="3" placeholder="例：Polkovaya Street 3, bld.5, Moscow, RUSSIA"></textarea></label>
+              <label class="single">买方电话<input name="doc8089_buyer_tel" autocomplete="off" type="text" placeholder="例：+7-495-123-45-67"></label>
+              <label class="single">买方邮箱<input name="doc8089_buyer_email" autocomplete="off" type="text" placeholder="例：info@airflot.ru"></label>
+              <label class="single">买方通知电话<input name="doc8089_buyer_notice_tel" autocomplete="off" type="text" ></label>
+              <label class="single">买方通知邮箱<input name="doc8089_buyer_notice_email" autocomplete="off" type="text" ></label>
+              <label class="wide">买方通信地址（俄文）<input name="doc8089_buyer_postal_ru" autocomplete="off" type="text" ></label>
+              <label class="wide">买方通信地址（英文）<input name="doc8089_buyer_postal_en" autocomplete="off" type="text" ></label>
+              <label class="wide">买方银行（俄文）<textarea name="doc8089_buyer_bank_ru" autocomplete="off" rows="3" placeholder="例：ВТБ (ПАО)"></textarea></label>
+              <label class="wide">买方银行（英文）<textarea name="doc8089_buyer_bank_en" autocomplete="off" rows="3" placeholder="例：VTB Bank (PJSC)"></textarea></label>
+              <label class="wide">买方银行地址（俄文）<textarea name="doc8089_buyer_bank_address_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">买方银行地址（英文）<textarea name="doc8089_buyer_bank_address_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">买方账户号<input name="doc8089_buyer_account_no" autocomplete="off" type="text" ></label>
+              <label class="single">买方 SWIFT<input name="doc8089_buyer_swift" autocomplete="off" type="text" placeholder="例：VTBRCNSH"></label>
+              <label class="single">买方代理行账户<input name="doc8089_buyer_corr_account" autocomplete="off" type="text" ></label>
+              <label class="single">买方 BIC<input name="doc8089_buyer_bic" autocomplete="off" type="text" ></label>
+              <label class="single">买方代表俄文<input name="doc8089_buyer_representative_ru" autocomplete="off" type="text" placeholder="例：Иванов И.И."></label>
+              <label class="single">买方代表英文<input name="doc8089_buyer_representative_en" autocomplete="off" type="text" placeholder="例：Ivanov I.I."></label>
+              <label class="single">买方签字俄文<input name="doc8089_buyer_signature_ru" autocomplete="off" type="text" ></label>
+              <label class="single">买方签字英文<input name="doc8089_buyer_signature_en" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="III" data-step="第 2 步 · 卖方">
+            <h3>卖方（Продавец / Seller）信息</h3>
+            <p class="section-tip">卖方即中国出口商。</p>
+            <div class="grid">
+              <label class="single">卖方名称<input name="doc8089_seller_name" autocomplete="off" type="text" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO., LTD"></label>
+              <label class="wide">卖方俄文地址<textarea name="doc8089_seller_address_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">卖方英文地址<textarea name="doc8089_seller_address_en" autocomplete="off" rows="3" placeholder="例：Sicun Industrial, Heqing Town, Foshan, China"></textarea></label>
+              <label class="single">卖方电话<input name="doc8089_seller_tel" autocomplete="off" type="text" ></label>
+              <label class="single">卖方邮箱<input name="doc8089_seller_email" autocomplete="off" type="text" ></label>
+              <label class="wide">卖方银行（俄文）<textarea name="doc8089_seller_bank_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">卖方银行（英文）<textarea name="doc8089_seller_bank_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">卖方银行地址（俄文）<textarea name="doc8089_seller_bank_address_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">卖方银行地址（英文）<textarea name="doc8089_seller_bank_address_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">卖方账户号<input name="doc8089_seller_account_no" autocomplete="off" type="text" placeholder="例：40807156200610027979"></label>
+              <label class="single">卖方 SWIFT<input name="doc8089_seller_swift" autocomplete="off" type="text" placeholder="例：VTBRCNSH"></label>
+              <label class="single">卖方收款人<input name="doc8089_seller_beneficiary" autocomplete="off" type="text" ></label>
+              <label class="single">卖方代表俄文<input name="doc8089_seller_representative_ru" autocomplete="off" type="text" placeholder="例：Чжан Сань"></label>
+              <label class="single">卖方代表英文<input name="doc8089_seller_representative_en" autocomplete="off" type="text" placeholder="例：Zhang San"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="IV" data-step="第 3 步">
+            <h3>货物与价格</h3>
+            <p class="section-tip">商品名称（俄/英）、数量、单价、总价、包装信息。</p>
+            <div class="grid">
+              <label class="wide">商品名称（俄文）<textarea name="doc8089_goods_name_ru" autocomplete="off" rows="3" placeholder="例：Мебель"></textarea></label>
+              <label class="wide">商品名称（英文）<textarea name="doc8089_goods_name_en" autocomplete="off" rows="3" placeholder="例：Furniture"></textarea></label>
+              <label class="single">数量<input name="doc8089_goods_qty" autocomplete="off" type="text" placeholder="例：1 set"></label>
+              <label class="single">单价<input name="doc8089_goods_unit_price" autocomplete="off" type="text" placeholder="例：USD 100,000.00"></label>
+              <label class="single">总价<input name="doc8089_goods_total" autocomplete="off" type="text" placeholder="例：USD 100,000.00"></label>
+              <label class="wide">包装内容（俄文）<textarea name="doc8089_package_includes_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">包装内容（英文）<textarea name="doc8089_package_includes_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">合同总价（俄文）<input name="doc8089_total_price_ru" autocomplete="off" type="text" placeholder="例：100 000,00 долларов США"></label>
+              <label class="wide">合同总价（英文）<input name="doc8089_total_price_en" autocomplete="off" type="text" placeholder="例：USD 100,000.00"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="V" data-step="第 3 步 · 交货">
+            <h3>交货条款</h3>
+            <p class="section-tip">贸易术语（如 FOB/CIF）、交货时间，建议中俄双语填写。</p>
+            <div class="grid">
+              <label class="wide">交货条款（俄文）<textarea name="doc8089_delivery_terms_ru" autocomplete="off" rows="3" placeholder="例：FOB Шанхай"></textarea></label>
+              <label class="wide">交货条款（英文）<textarea name="doc8089_delivery_terms_en" autocomplete="off" rows="3" placeholder="例：FOB Shanghai"></textarea></label>
+              <label class="wide">交货时间（俄文）<input name="doc8089_delivery_time_ru" autocomplete="off" type="text" placeholder="例：В течение 45 дней с даты контракта"></label>
+              <label class="wide">交货时间（英文）<input name="doc8089_delivery_time_en" autocomplete="off" type="text" placeholder="例：Within 45 days from the contract date"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="VI" data-step="第 4 步 · 付款">
+            <h3>付款条款</h3>
+            <p class="section-tip">预付款与尾款比例、金额及银行工作日。</p>
+            <div class="grid">
+              <label class="single">预付款比例（%）<input name="doc8089_payment_advance_percent" autocomplete="off" type="text" placeholder="例：30"></label>
+              <label class="single">预付款金额（数字）<input name="doc8089_payment_advance_amount" autocomplete="off" type="text" placeholder="例：30000.00"></label>
+              <label class="single">预付款金额（俄文）<input name="doc8089_payment_advance_amount_ru" autocomplete="off" type="text" placeholder="例：30 000,00 долларов США"></label>
+              <label class="single">预付款金额（英文）<input name="doc8089_payment_advance_amount_en" autocomplete="off" type="text" placeholder="例：USD 30,000.00"></label>
+              <label class="single">尾款比例（%）<input name="doc8089_payment_balance_percent" autocomplete="off" type="text" placeholder="例：70"></label>
+              <label class="single">尾款金额（数字）<input name="doc8089_payment_balance_amount" autocomplete="off" type="text" placeholder="例：70000.00"></label>
+              <label class="single">尾款金额（俄文）<input name="doc8089_payment_balance_amount_ru" autocomplete="off" type="text" placeholder="例：70 000,00 долларов США"></label>
+              <label class="single">尾款金额（英文）<input name="doc8089_payment_balance_amount_en" autocomplete="off" type="text" placeholder="例：USD 70,000.00"></label>
+              <label class="single">银行工作日（数字）<input name="doc8089_payment_bank_days" autocomplete="off" type="text" placeholder="例：5"></label>
+              <label class="single">银行工作日（俄文）<input name="doc8089_payment_bank_days_ru" autocomplete="off" type="text" placeholder="例：5 банковских дней"></label>
+              <label class="single">银行工作日（英文）<input name="doc8089_payment_bank_days_en" autocomplete="off" type="text" placeholder="例：5 banking days"></label>
+              <label class="single">交货通知天数（数字）<input name="doc8089_delivery_notice_days" autocomplete="off" type="text" placeholder="例：7"></label>
+              <label class="single">交货通知天数（俄文）<input name="doc8089_delivery_notice_days_ru" autocomplete="off" type="text" placeholder="例：7 календарных дней"></label>
+              <label class="single">交货通知天数（英文）<input name="doc8089_delivery_notice_days_en" autocomplete="off" type="text" placeholder="例：7 calendar days"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="VII" data-step="第 4 步 · 表单">
+            <h3>附录表单信息</h3>
+            <p class="section-tip">用于附录表格中的合同号、日期、卖方名称等信息。大多数可以从前面自动填入。</p>
+            <div class="grid">
+              <label class="single">附录号<input name="doc8089_form_appendix_no" autocomplete="off" type="text" ></label>
+              <label class="single">附录日期日（俄文）<input name="doc8089_form_appendix_day_ru" autocomplete="off" type="text" placeholder="例：04"></label>
+              <label class="single">附录日期月（俄文）<input name="doc8089_form_appendix_month_ru" autocomplete="off" type="text" placeholder="例：июня"></label>
+              <label class="single">附录日期年（俄文）<input name="doc8089_form_appendix_year_ru" autocomplete="off" type="text" placeholder="例：2026"></label>
+              <label class="single">表单合同号<input name="doc8089_form_contract_no" autocomplete="off" type="text" ></label>
+              <label class="single">合同日期日（俄文）<input name="doc8089_form_contract_day_ru" autocomplete="off" type="text" ></label>
+              <label class="single">合同日期月（俄文）<input name="doc8089_form_contract_month_ru" autocomplete="off" type="text" ></label>
+              <label class="single">合同日期年（俄文）<input name="doc8089_form_contract_year_ru" autocomplete="off" type="text" ></label>
+              <label class="single">附录日期（英文）<input name="doc8089_form_appendix_date_en" autocomplete="off" type="text" ></label>
+              <label class="single">附录年份（英文）<input name="doc8089_form_appendix_year_en" autocomplete="off" type="text" ></label>
+              <label class="single">表单合同号（英文）<input name="doc8089_form_contract_no_en" autocomplete="off" type="text" ></label>
+              <label class="single">合同日期（英文）<input name="doc8089_form_contract_date_en" autocomplete="off" type="text" ></label>
+              <label class="single">合同年份（英文）<input name="doc8089_form_contract_year_en" autocomplete="off" type="text" ></label>
+              <label class="single">卖方名称俄文（表格）<input name="doc8089_form_seller_name_ru" autocomplete="off" type="text" ></label>
+              <label class="single">卖方国家俄文（表格）<input name="doc8089_form_seller_country_ru" autocomplete="off" type="text" placeholder="例：Китай"></label>
+              <label class="single">卖方负责人俄文（表格）<input name="doc8089_form_seller_director_ru" autocomplete="off" type="text" ></label>
+              <label class="single">卖方名称英文（表格）<input name="doc8089_form_seller_name_en" autocomplete="off" type="text" ></label>
+              <label class="single">卖方国家英文（表格）<input name="doc8089_form_seller_country_en" autocomplete="off" type="text" placeholder="例：China"></label>
+              <label class="single">卖方负责人英文（表格）<input name="doc8089_form_seller_director_en" autocomplete="off" type="text" ></label>
+              <label class="single">交货条款俄文（表格）<textarea name="doc8089_form_delivery_terms_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">交货条款英文（表格）<textarea name="doc8089_form_delivery_terms_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">交货时间俄文（表格）<input name="doc8089_form_delivery_time_ru" autocomplete="off" type="text" ></label>
+              <label class="single">交货时间英文（表格）<input name="doc8089_form_delivery_time_en" autocomplete="off" type="text" ></label>
+              <label class="single">付款条款俄文（表格）<textarea name="doc8089_form_payment_terms_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">付款条款英文（表格）<textarea name="doc8089_form_payment_terms_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">装运单据俄文（表格）<textarea name="doc8089_form_shipping_docs_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">装运单据英文（表格）<textarea name="doc8089_form_shipping_docs_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">验收条款俄文（表格）<textarea name="doc8089_form_acceptance_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">验收条款英文（表格）<textarea name="doc8089_form_acceptance_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">买方签字人俄文（表格）<input name="doc8089_form_buyer_signer_ru" autocomplete="off" type="text" ></label>
+              <label class="single">买方签名俄文（表格）<input name="doc8089_form_buyer_signature_ru" autocomplete="off" type="text" ></label>
+              <label class="single">卖方签字人俄文（表格）<input name="doc8089_form_seller_signer_ru" autocomplete="off" type="text" ></label>
+              <label class="single">卖方签名俄文（表格）<input name="doc8089_form_seller_signature_ru" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="3" data-wizard-title="附件2">
+          <div class="wizard-step-title">附件2</div>
+          <div class="wizard-step-subtitle">请填写以下信息。带 <strong>*</strong> 标记的为建议填写字段，其余可选。</div>
+
+          <section class="section-block" data-num="I" data-step="第 1 步">
+            <h3>合同基础信息</h3>
+            <p class="section-tip">合同号、日期等基础信息。附件编号默认填「2」。</p>
+            <div class="grid">
+              <label class="single">附件编号<input name="doc8091_appendix_no" autocomplete="off" type="text" placeholder="例：2"></label>
+              <label class="single">合同号<input name="doc8091_contract_no" autocomplete="off" type="text" placeholder="例：GOF-04/06-26-CHN"></label>
+              <label class="single">签订日期（俄文）<input name="doc8091_contract_date_ru" autocomplete="off" type="text" placeholder="例：«04» июня 2026 г."></label>
+              <label class="single">签订日期（英文）<input name="doc8091_contract_date_en" autocomplete="off" type="text" placeholder="例：04.06.2026"></label>
+              <label class="single">附件日期（俄文）<input name="doc8091_appendix_date_ru" autocomplete="off" type="text" placeholder="例：«04» июня 2026 г."></label>
+              <label class="single">附件日期（英文）<input name="doc8091_appendix_date_en" autocomplete="off" type="text" placeholder="例：04.06.2026"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="II" data-step="第 2 步 · 买方">
+            <h3>买方信息</h3>
+            <p class="section-tip">买方即进口商/俄方公司。</p>
+            <div class="grid">
+              <label class="single">买方俄文简称<input name="doc8091_buyer_name_ru" autocomplete="off" type="text" placeholder="例：ООО «АИРФЛОТ ТЕХНИКС ТХ»"></label>
+              <label class="single">买方英文简称<input name="doc8091_buyer_name_en" autocomplete="off" type="text" placeholder="例：AIRFLOT TECHNICS TH Ltd."></label>
+              <label class="single">买方俄文全称<input name="doc8091_buyer_full_name_ru" autocomplete="off" type="text" ></label>
+              <label class="wide">买方俄文地址<textarea name="doc8091_buyer_address_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">买方英文地址<textarea name="doc8091_buyer_address_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">买方代表俄文<input name="doc8091_buyer_representative_ru" autocomplete="off" type="text" placeholder="例：Иванов И.И."></label>
+              <label class="single">买方代表英文<input name="doc8091_buyer_representative_en" autocomplete="off" type="text" placeholder="例：Ivanov I.I."></label>
+              <label class="single">买方签字俄文<input name="doc8091_buyer_signature_ru" autocomplete="off" type="text" ></label>
+              <label class="single">买方签字英文<input name="doc8091_buyer_signature_en" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="III" data-step="第 2 步 · 卖方">
+            <h3>卖方信息</h3>
+            <p class="section-tip">卖方即中国出口商。</p>
+            <div class="grid">
+              <label class="single">卖方名称<input name="doc8091_seller_name" autocomplete="off" type="text" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO., LTD"></label>
+              <label class="wide">卖方俄文地址<textarea name="doc8091_seller_address_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">卖方英文地址<textarea name="doc8091_seller_address_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">卖方代表俄文<input name="doc8091_seller_representative_ru" autocomplete="off" type="text" placeholder="例：Чжан Сань"></label>
+              <label class="single">卖方代表英文<input name="doc8091_seller_representative_en" autocomplete="off" type="text" placeholder="例：Zhang San"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="IV" data-step="第 3 步">
+            <h3>货物与价格</h3>
+            <p class="section-tip">商品名称、数量、单价、总价、交货条款。</p>
+            <div class="grid">
+              <label class="wide">商品名称（俄文）<textarea name="doc8091_goods_name_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">商品名称（英文）<textarea name="doc8091_goods_name_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">数量<input name="doc8091_goods_qty" autocomplete="off" type="text" ></label>
+              <label class="single">单价<input name="doc8091_goods_unit_price" autocomplete="off" type="text" ></label>
+              <label class="single">总价<input name="doc8091_goods_total" autocomplete="off" type="text" ></label>
+              <label class="wide">合同总价（俄文）<input name="doc8091_total_price_ru" autocomplete="off" type="text" ></label>
+              <label class="wide">合同总价（英文）<input name="doc8091_total_price_en" autocomplete="off" type="text" placeholder="例：USD 100,000.00"></label>
+              <label class="wide">交货条款（俄文）<textarea name="doc8091_delivery_terms_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">交货条款（英文）<textarea name="doc8091_delivery_terms_en" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">交货时间（俄文）<input name="doc8091_delivery_time_ru" autocomplete="off" type="text" ></label>
+              <label class="wide">交货时间（英文）<input name="doc8091_delivery_time_en" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="V" data-step="第 4 步 · 付款">
+            <h3>付款条款</h3>
+            <p class="section-tip">预付款与尾款比例、金额、银行工作日及交货通知天数。</p>
+            <div class="grid">
+              <label class="single">预付款比例（%）<input name="doc8091_payment_advance_percent" autocomplete="off" type="text" placeholder="例：30"></label>
+              <label class="single">预付款金额（数字）<input name="doc8091_payment_advance_amount" autocomplete="off" type="text" placeholder="例：30000.00"></label>
+              <label class="single">预付款金额（俄文）<input name="doc8091_payment_advance_amount_ru" autocomplete="off" type="text" ></label>
+              <label class="single">预付款金额（英文）<input name="doc8091_payment_advance_amount_en" autocomplete="off" type="text" ></label>
+              <label class="single">尾款比例（%）<input name="doc8091_payment_balance_percent" autocomplete="off" type="text" placeholder="例：70"></label>
+              <label class="single">尾款金额（数字）<input name="doc8091_payment_balance_amount" autocomplete="off" type="text" placeholder="例：70000.00"></label>
+              <label class="single">尾款金额（俄文）<input name="doc8091_payment_balance_amount_ru" autocomplete="off" type="text" ></label>
+              <label class="single">尾款金额（英文）<input name="doc8091_payment_balance_amount_en" autocomplete="off" type="text" ></label>
+              <label class="single">银行工作日（数字）<input name="doc8091_payment_bank_days" autocomplete="off" type="text" placeholder="例：5"></label>
+              <label class="single">银行工作日（俄文）<input name="doc8091_payment_bank_days_ru" autocomplete="off" type="text" ></label>
+              <label class="single">银行工作日（英文）<input name="doc8091_payment_bank_days_en" autocomplete="off" type="text" ></label>
+              <label class="single">交货通知天数（数字）<input name="doc8091_delivery_notice_days" autocomplete="off" type="text" placeholder="例：7"></label>
+              <label class="single">交货通知天数（俄文）<input name="doc8091_delivery_notice_days_ru" autocomplete="off" type="text" ></label>
+              <label class="single">交货通知天数（英文）<input name="doc8091_delivery_notice_days_en" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="4" data-wizard-title="代理出口结算协议">
+          <div class="wizard-step-title">代理出口结算协议</div>
+          <div class="wizard-step-subtitle">请填写以下信息。带 <strong>*</strong> 标记的为建议填写字段，其余可选。</div>
+
+          <section class="section-block" data-num="I" data-step="第 1 步">
+            <h3>协议基础信息</h3>
+            <p class="section-tip">协议编号、签订日期（中俄双语）、签订地点。</p>
+            <div class="grid">
+              <label class="single">协议编号<input name="doc8092_contract_no" autocomplete="off" type="text" placeholder="例：SETTLE-2026-001"></label>
+              <label class="single">签订日期（中文）<input name="doc8092_sign_date_zh" autocomplete="off" type="text" placeholder="例：2026年6月16日"></label>
+              <label class="single">签订日期（俄文）<input name="doc8092_sign_date_ru" autocomplete="off" type="text" placeholder="例：«16» июня 2026 г."></label>
+              <label class="single">签订地点（中文）<input name="doc8092_sign_place_zh" autocomplete="off" type="text" placeholder="例：中国广州"></label>
+              <label class="single">签订地点（俄文）<input name="doc8092_sign_place_ru" autocomplete="off" type="text" placeholder="例：Гуанчжоу, КНР"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="II" data-step="第 2 步 · 甲方">
+            <h3>甲方信息</h3>
+            <p class="section-tip">甲方（委托方/结算方）详细信息，中文与俄文双语。</p>
+            <div class="grid">
+              <label class="single">甲方中文名称<input name="doc8092_partyA_name_zh" autocomplete="off" type="text" placeholder="例：广东欧舒见家具有限公司"></label>
+              <label class="single">甲方统一社会信用代码<input name="doc8092_partyA_credit_code" autocomplete="off" type="text" ></label>
+              <label class="wide">甲方中文地址<textarea name="doc8092_partyA_address_zh" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">甲方中文联系人<input name="doc8092_partyA_contact_zh" autocomplete="off" type="text" ></label>
+              <label class="single">甲方电话<input name="doc8092_partyA_tel" autocomplete="off" type="text" ></label>
+              <label class="single">甲方邮箱<input name="doc8092_partyA_email" autocomplete="off" type="text" ></label>
+              <label class="single">甲方俄文名称<input name="doc8092_partyA_name_ru" autocomplete="off" type="text" ></label>
+              <label class="single">甲方俄文信用代码<input name="doc8092_partyA_credit_code_ru" autocomplete="off" type="text" ></label>
+              <label class="wide">甲方俄文地址<textarea name="doc8092_partyA_address_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">甲方俄文联系人<input name="doc8092_partyA_contact_ru" autocomplete="off" type="text" ></label>
+              <label class="single">甲方俄文电话<input name="doc8092_partyA_tel_ru" autocomplete="off" type="text" ></label>
+              <label class="single">甲方俄文邮箱<input name="doc8092_partyA_email_ru" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="III" data-step="第 2 步 · 乙方">
+            <h3>乙方信息</h3>
+            <p class="section-tip">乙方（服务提供方）详细信息。</p>
+            <div class="grid">
+              <label class="single">乙方中文名称<input name="doc8092_partyB_name_zh" autocomplete="off" type="text" ></label>
+              <label class="single">乙方统一社会信用代码<input name="doc8092_partyB_credit_code" autocomplete="off" type="text" ></label>
+              <label class="wide">乙方中文地址<textarea name="doc8092_partyB_address_zh" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">乙方中文联系人<input name="doc8092_partyB_contact_zh" autocomplete="off" type="text" ></label>
+              <label class="single">乙方电话<input name="doc8092_partyB_tel" autocomplete="off" type="text" ></label>
+              <label class="single">乙方邮箱<input name="doc8092_partyB_email" autocomplete="off" type="text" ></label>
+              <label class="single">乙方俄文名称<input name="doc8092_partyB_name_ru" autocomplete="off" type="text" ></label>
+              <label class="single">乙方俄文信用代码<input name="doc8092_partyB_credit_code_ru" autocomplete="off" type="text" ></label>
+              <label class="wide">乙方俄文地址<textarea name="doc8092_partyB_address_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">乙方俄文联系人<input name="doc8092_partyB_contact_ru" autocomplete="off" type="text" ></label>
+              <label class="single">乙方俄文电话<input name="doc8092_partyB_tel_ru" autocomplete="off" type="text" ></label>
+              <label class="single">乙方俄文邮箱<input name="doc8092_partyB_email_ru" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="IV" data-step="第 3 步">
+            <h3>结算与费率信息</h3>
+            <p class="section-tip">货物摘要、费率、最低费用、年化利率及收款账户。</p>
+            <div class="grid">
+              <label class="wide">货物摘要中文<textarea name="doc8092_goods_summary_zh" autocomplete="off" rows="3" placeholder="例：家具"></textarea></label>
+              <label class="wide">货物摘要俄文<textarea name="doc8092_goods_summary_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">费率（%）<input name="doc8092_fee_percent" autocomplete="off" type="text" placeholder="例：1.5"></label>
+              <label class="single">最低费用（人民币）<input name="doc8092_fee_min_cny" autocomplete="off" type="text" placeholder="例：500.00"></label>
+              <label class="single">年化利率（%）<input name="doc8092_annual_rate_percent" autocomplete="off" type="text" placeholder="例：6.0"></label>
+              <label class="single">收款账户公司名<input name="doc8092_account_company" autocomplete="off" type="text" ></label>
+              <label class="single">收款开户行<input name="doc8092_account_bank" autocomplete="off" type="text" ></label>
+              <label class="single">收款账户号<input name="doc8092_account_no" autocomplete="off" type="text" ></label>
+              <label class="single">乙方实际控制人<input name="doc8092_partyB_controller" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="V" data-step="第 3 步 · 签署">
+            <h3>签署日期</h3>
+            <p class="section-tip">签署日期（年/月/日分别填写）。</p>
+            <div class="grid">
+              <label class="single">签署年份<input name="doc8092_sign_year" autocomplete="off" type="text" placeholder="例：2026"></label>
+              <label class="single">签署月份<input name="doc8092_sign_month" autocomplete="off" type="text" placeholder="例：6"></label>
+              <label class="single">签署日期<input name="doc8092_sign_day" autocomplete="off" type="text" placeholder="例：16"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="5" data-wizard-title="应付账款垫付协议">
+          <div class="wizard-step-title">应付账款垫付协议</div>
+          <div class="wizard-step-subtitle">请填写以下信息。带 <strong>*</strong> 标记的为建议填写字段，其余可选。</div>
+
+          <section class="section-block" data-num="I" data-step="第 1 步">
+            <h3>协议基础信息</h3>
+            <p class="section-tip">协议编号、签订日期（中俄双语）、签订地点。</p>
+            <div class="grid">
+              <label class="single">协议编号<input name="doc8093_contract_no" autocomplete="off" type="text" placeholder="例：PREPAY-2026-001"></label>
+              <label class="single">签订日期（中文）<input name="doc8093_sign_date_zh" autocomplete="off" type="text" placeholder="例：2026年6月16日"></label>
+              <label class="single">签订日期（俄文）<input name="doc8093_sign_date_ru" autocomplete="off" type="text" placeholder="例：«16» июня 2026 г."></label>
+              <label class="single">签订地点（中文）<input name="doc8093_sign_place_zh" autocomplete="off" type="text" placeholder="例：中国广州"></label>
+              <label class="single">签订地点（俄文）<input name="doc8093_sign_place_ru" autocomplete="off" type="text" placeholder="例：Гуанчжоу, КНР"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="II" data-step="第 2 步 · 甲方">
+            <h3>甲方信息</h3>
+            <p class="section-tip">甲方（垫付方）公司全称、税号、地址、联系方式（中俄双语）。</p>
+            <div class="grid">
+              <label class="single">甲方中文名称<input name="doc8093_partyA_name_zh" autocomplete="off" type="text" ></label>
+              <label class="single">甲方俄文名称<input name="doc8093_partyA_name_ru" autocomplete="off" type="text" ></label>
+              <label class="single">甲方 INN<input name="doc8093_partyA_inn" autocomplete="off" type="text" ></label>
+              <label class="single">甲方 KPP<input name="doc8093_partyA_kpp" autocomplete="off" type="text" ></label>
+              <label class="wide">甲方中文地址<textarea name="doc8093_partyA_address_zh" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">甲方中文联系人<input name="doc8093_partyA_contact_zh" autocomplete="off" type="text" ></label>
+              <label class="single">甲方俄文联系人<input name="doc8093_partyA_contact_ru" autocomplete="off" type="text" ></label>
+              <label class="single">甲方电话<input name="doc8093_partyA_tel" autocomplete="off" type="text" ></label>
+              <label class="single">甲方俄文电话<input name="doc8093_partyA_tel_ru" autocomplete="off" type="text" ></label>
+              <label class="single">甲方邮箱<input name="doc8093_partyA_email" autocomplete="off" type="text" ></label>
+              <label class="single">甲方俄文邮箱<input name="doc8093_partyA_email_ru" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="III" data-step="第 2 步 · 乙方">
+            <h3>乙方信息</h3>
+            <p class="section-tip">乙方（被垫付方/客户）公司信息。</p>
+            <div class="grid">
+              <label class="single">乙方中文名称<input name="doc8093_partyB_name_zh" autocomplete="off" type="text" ></label>
+              <label class="single">乙方俄文名称<input name="doc8093_partyB_name_ru" autocomplete="off" type="text" ></label>
+              <label class="single">乙方 INN<input name="doc8093_partyB_inn" autocomplete="off" type="text" ></label>
+              <label class="single">乙方 KPP<input name="doc8093_partyB_kpp" autocomplete="off" type="text" ></label>
+              <label class="single">乙方统一社会信用代码<input name="doc8093_partyB_credit_code" autocomplete="off" type="text" ></label>
+              <label class="wide">乙方中文地址<textarea name="doc8093_partyB_address_zh" autocomplete="off" rows="3" ></textarea></label>
+              <label class="wide">乙方俄文地址<textarea name="doc8093_partyB_address_ru" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">乙方中文联系人<input name="doc8093_partyB_contact_zh" autocomplete="off" type="text" ></label>
+              <label class="single">乙方俄文联系人<input name="doc8093_partyB_contact_ru" autocomplete="off" type="text" ></label>
+              <label class="single">乙方电话<input name="doc8093_partyB_tel" autocomplete="off" type="text" ></label>
+              <label class="single">乙方俄文电话<input name="doc8093_partyB_tel_ru" autocomplete="off" type="text" ></label>
+              <label class="single">乙方邮箱<input name="doc8093_partyB_email" autocomplete="off" type="text" ></label>
+              <label class="single">乙方俄文邮箱<input name="doc8093_partyB_email_ru" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="IV" data-step="第 3 步">
+            <h3>交易与费率信息</h3>
+            <p class="section-tip">交易卖方名称、关键联系人、费率、关联合同号。</p>
+            <div class="grid">
+              <label class="single">交易卖方名称<input name="doc8093_trade_seller_name" autocomplete="off" type="text" ></label>
+              <label class="single">乙方联系邮箱<input name="doc8093_partyB_contact_email" autocomplete="off" type="text" ></label>
+              <label class="single">甲方联系邮箱<input name="doc8093_partyA_contact_email" autocomplete="off" type="text" ></label>
+              <label class="single">附件1 合同号<input name="doc8093_annex1_contract_no" autocomplete="off" type="text" ></label>
+              <label class="single">附件1 订单号<input name="doc8093_annex1_order_no" autocomplete="off" type="text" ></label>
+              <label class="single">附件1 客户编号<input name="doc8093_annex1_client_no" autocomplete="off" type="text" ></label>
+              <label class="single">年化费用率（%）<input name="doc8093_fee_annual_percent" autocomplete="off" type="text" placeholder="例：8.0"></label>
+              <label class="single">逾期费率（%）<input name="doc8093_fee_overdue_percent" autocomplete="off" type="text" placeholder="例：12.0"></label>
+              <label class="single">中方联系人<input name="doc8093_contact_china_name" autocomplete="off" type="text" ></label>
+              <label class="single">附件2 合同号<input name="doc8093_annex2_contract_no" autocomplete="off" type="text" ></label>
+              <label class="single">附件2 订单号<input name="doc8093_annex2_order_no" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="V" data-step="第 3 步 · 服务期限">
+            <h3>服务期限与金额</h3>
+            <p class="section-tip">服务起始与结束日期、总金额。</p>
+            <div class="grid">
+              <label class="single">服务开始年份<input name="doc8093_service_start_year" autocomplete="off" type="text" placeholder="例：2026"></label>
+              <label class="single">服务开始月份<input name="doc8093_service_start_month" autocomplete="off" type="text" placeholder="例：6"></label>
+              <label class="single">服务开始日期<input name="doc8093_service_start_day" autocomplete="off" type="text" placeholder="例：16"></label>
+              <label class="single">服务结束年份<input name="doc8093_service_end_year" autocomplete="off" type="text" placeholder="例：2027"></label>
+              <label class="single">服务结束月份<input name="doc8093_service_end_month" autocomplete="off" type="text" placeholder="例：6"></label>
+              <label class="single">服务结束日期<input name="doc8093_service_end_day" autocomplete="off" type="text" placeholder="例：15"></label>
+              <label class="single">总金额（人民币）<input name="doc8093_total_cny" autocomplete="off" type="text" placeholder="例：100000.00"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="VI" data-step="第 4 步 · 签署">
+            <h3>签署信息</h3>
+            <p class="section-tip">签署日期和双方签署人姓名。</p>
+            <div class="grid">
+              <label class="single">签署年份<input name="doc8093_sign_year" autocomplete="off" type="text" placeholder="例：2026"></label>
+              <label class="single">签署月份<input name="doc8093_sign_month" autocomplete="off" type="text" placeholder="例：6"></label>
+              <label class="single">签署日期<input name="doc8093_sign_day" autocomplete="off" type="text" placeholder="例：16"></label>
+              <label class="single">甲方签署人中文<input name="doc8093_partyA_signer" autocomplete="off" type="text" ></label>
+              <label class="single">甲方签署人俄文<input name="doc8093_partyA_signer_ru" autocomplete="off" type="text" ></label>
+              <label class="single">乙方签署人中文<input name="doc8093_partyB_signer" autocomplete="off" type="text" ></label>
+              <label class="single">乙方签署人俄文<input name="doc8093_partyB_signer_ru" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="6" data-wizard-title="垫付申请书与承诺函">
+          <div class="wizard-step-title">垫付申请书与承诺函</div>
+          <div class="wizard-step-subtitle">请填写以下信息。带 <strong>*</strong> 标记的为建议填写字段，其余可选。</div>
+
+          <section class="section-block" data-num="I" data-step="第 1 步">
+            <h3>收件人与申请人信息</h3>
+            <p class="section-tip">收件方名称（中俄双语）、买方名称、卖方名称。</p>
+            <div class="grid">
+              <label class="single">收件人（中文）<input name="doc8094_recipient_zh" autocomplete="off" type="text" placeholder="例：广东欧舒见家具有限公司"></label>
+              <label class="single">收件人（俄文）<input name="doc8094_recipient_ru" autocomplete="off" type="text" ></label>
+              <label class="single">买方英文名称<input name="doc8094_buyer_name_en" autocomplete="off" type="text" placeholder="例：AIRFLOT TECHNICS TH Ltd."></label>
+              <label class="single">买方俄文名称<input name="doc8094_buyer_name_ru" autocomplete="off" type="text" ></label>
+              <label class="single">卖方名称<input name="doc8094_seller_name" autocomplete="off" type="text" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO., LTD"></label>
+              <label class="single">申请公司名称<input name="doc8094_applicant_company_name" autocomplete="off" type="text" ></label>
+              <label class="single">法定代表人姓名<input name="doc8094_legal_rep_name" autocomplete="off" type="text" ></label>
+              <label class="single">实际控制人姓名<input name="doc8094_actual_controller_name" autocomplete="off" type="text" ></label>
+              <label class="single">联系电话<input name="doc8094_contact_phone" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="II" data-step="第 2 步">
+            <h3>垫付金额与贸易信息</h3>
+            <p class="section-tip">垫付金额、天数、关联贸易合同号与金额。</p>
+            <div class="grid">
+              <label class="single">垫付金额<input name="doc8094_advance_amount" autocomplete="off" type="text" placeholder="例：100000.00"></label>
+              <label class="single">垫付期限（天）<input name="doc8094_advance_term_days" autocomplete="off" type="text" placeholder="例：90"></label>
+              <label class="single">贸易合同号<input name="doc8094_trade_contract_no" autocomplete="off" type="text" placeholder="例：GOF-04/06-26-CHN"></label>
+              <label class="single">贸易合同日期<input name="doc8094_trade_contract_date" autocomplete="off" type="text" placeholder="例：04.06.2026"></label>
+              <label class="single">贸易合同金额<input name="doc8094_trade_contract_amount" autocomplete="off" type="text" placeholder="例：100000.00"></label>
+              <label class="single">发票金额<input name="doc8094_invoice_amount" autocomplete="off" type="text" placeholder="例：100000.00"></label>
+              <label class="single">装运港（中文）<input name="doc8094_shipment_port_zh" autocomplete="off" type="text" placeholder="例：上海港"></label>
+              <label class="single">装运港（俄文）<input name="doc8094_shipment_port_ru" autocomplete="off" type="text" ></label>
+              <label class="single">买方确认金额<input name="doc8094_buyer_confirmed_amount" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="III" data-step="第 2 步 · 利率">
+            <h3>利率与日期</h3>
+            <p class="section-tip">费用年化利率、逾期利率、起息日、到期日等。</p>
+            <div class="grid">
+              <label class="single">起息日<input name="doc8094_interest_start_date" autocomplete="off" type="text" placeholder="例：2026-06-16"></label>
+              <label class="single">费用年化利率（%）<input name="doc8094_fee_annual_percent" autocomplete="off" type="text" placeholder="例：8.0"></label>
+              <label class="single">逾期利率（%）<input name="doc8094_fee_overdue_percent" autocomplete="off" type="text" placeholder="例：12.0"></label>
+              <label class="single">垫付到期日<input name="doc8094_advance_due_date" autocomplete="off" type="text" placeholder="例：2026-09-14"></label>
+              <label class="wide">备注<textarea name="doc8094_remarks" autocomplete="off" rows="3" ></textarea></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="IV" data-step="第 3 步 · 账户">
+            <h3>收款人银行账户</h3>
+            <p class="section-tip">供应商（收款人）与代理人（收款人）的银行账户信息。</p>
+            <div class="grid">
+              <label class="single">供应商收款人名称<input name="doc8094_supplier_payee_name" autocomplete="off" type="text" ></label>
+              <label class="single">供应商银行（中文）<input name="doc8094_supplier_bank_zh" autocomplete="off" type="text" ></label>
+              <label class="single">供应商银行（俄文）<input name="doc8094_supplier_bank_ru" autocomplete="off" type="text" ></label>
+              <label class="single">供应商账户号<input name="doc8094_supplier_account_no" autocomplete="off" type="text" ></label>
+              <label class="single">代理人收款人名称<input name="doc8094_agent_payee_name" autocomplete="off" type="text" ></label>
+              <label class="single">代理人账户号<input name="doc8094_agent_account_no" autocomplete="off" type="text" ></label>
+              <label class="single">代理人开户行<input name="doc8094_agent_bank" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="V" data-step="第 3 步 · 签署">
+            <h3>签署信息</h3>
+            <p class="section-tip">追偿期限和签署日期。</p>
+            <div class="grid">
+              <label class="single">追偿期限（天）<input name="doc8094_claim_days" autocomplete="off" type="text" placeholder="例：7"></label>
+              <label class="single">签署年份<input name="doc8094_sign_year" autocomplete="off" type="text" placeholder="例：2026"></label>
+              <label class="single">签署月份<input name="doc8094_sign_month" autocomplete="off" type="text" placeholder="例：6"></label>
+              <label class="single">签署日期<input name="doc8094_sign_day" autocomplete="off" type="text" placeholder="例：16"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="7" data-wizard-title="付款保函">
+          <div class="wizard-step-title">付款保函</div>
+          <div class="wizard-step-subtitle">请填写以下信息。带 <strong>*</strong> 标记的为建议填写字段，其余可选。</div>
+
+          <section class="section-block" data-num="I" data-step="第 1 步">
+            <h3>保函基础信息</h3>
+            <p class="section-tip">保函编号、签发日期、受益人名称与地址。</p>
+            <div class="grid">
+              <label class="single">保函编号<input name="doc8095_guarantee_no" autocomplete="off" type="text" placeholder="例：LG-2026-001"></label>
+              <label class="single">签发日期<input name="doc8095_issue_date" autocomplete="off" type="text" placeholder="例：2026-06-16"></label>
+              <label class="single">受益人名称<input name="doc8095_beneficiary_name" autocomplete="off" type="text" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO., LTD"></label>
+              <label class="wide">受益人地址<textarea name="doc8095_beneficiary_address" autocomplete="off" rows="3" ></textarea></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="II" data-step="第 2 步">
+            <h3>通知行与申请人</h3>
+            <p class="section-tip">通知行、代收行账户、申请人（开立保函的一方）名称与地址。</p>
+            <div class="grid">
+              <label class="single">通知行<input name="doc8095_notice_bank" autocomplete="off" type="text" ></label>
+              <label class="single">代收行账户<input name="doc8095_collecting_agent_account" autocomplete="off" type="text" ></label>
+              <label class="single">代收行币种<input name="doc8095_collecting_agent_currency" autocomplete="off" type="text" placeholder="例：USD"></label>
+              <label class="single">申请人名称<input name="doc8095_applicant_name" autocomplete="off" type="text" ></label>
+              <label class="wide">申请人地址<textarea name="doc8095_applicant_address" autocomplete="off" rows="3" ></textarea></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="III" data-step="第 2 步 · 担保">
+            <h3>担保人信息</h3>
+            <p class="section-tip">担保人（通常为银行）分行地址、SWIFT。</p>
+            <div class="grid">
+              <label class="wide">担保人分行完整地址<textarea name="doc8095_guarantor_branch_full_address" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">担保人 SWIFT<input name="doc8095_guarantor_swift" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="IV" data-step="第 3 步">
+            <h3>融资金额与保函金额</h3>
+            <p class="section-tip">融资协议编号、名称、基础金额、保函比例与保函金额。</p>
+            <div class="grid">
+              <label class="single">融资协议编号<input name="doc8095_finance_agreement_no" autocomplete="off" type="text" ></label>
+              <label class="single">融资协议名称<input name="doc8095_finance_agreement_name" autocomplete="off" type="text" ></label>
+              <label class="single">基础金额<input name="doc8095_base_amount" autocomplete="off" type="text" placeholder="例：100000.00"></label>
+              <label class="single">保函比例（%）<input name="doc8095_guarantee_percent" autocomplete="off" type="text" placeholder="例：100"></label>
+              <label class="single">保函金额<input name="doc8095_guarantee_amount" autocomplete="off" type="text" placeholder="例：100000.00"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="V" data-step="第 3 步 · 交单">
+            <h3>交单行与账户</h3>
+            <p class="section-tip">交单行、SWIFT、分行、地址、部门、电话等。</p>
+            <div class="grid">
+              <label class="single">交单行名称<input name="doc8095_presentation_bank" autocomplete="off" type="text" ></label>
+              <label class="single">交单行 SWIFT<input name="doc8095_presentation_swift" autocomplete="off" type="text" ></label>
+              <label class="single">交单行分行<input name="doc8095_presentation_branch" autocomplete="off" type="text" ></label>
+              <label class="wide">交单行地址<textarea name="doc8095_presentation_address" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">交单行部门<input name="doc8095_presentation_department" autocomplete="off" type="text" ></label>
+              <label class="single">交单行电话<input name="doc8095_presentation_tel" autocomplete="off" type="text" ></label>
+              <label class="single">交单行传真<input name="doc8095_presentation_fax" autocomplete="off" type="text" ></label>
+              <label class="single">交单行 SWIFT 线路<input name="doc8095_presentation_swift_line" autocomplete="off" type="text" ></label>
+              <label class="single">应付账户号<input name="doc8095_account_payable_no" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="VI" data-step="第 4 步">
+            <h3>有效期与签署</h3>
+            <p class="section-tip">有效期天数、到期地点、索赔行地址、签署行名称等。</p>
+            <div class="grid">
+              <label class="single">有效期（天）<input name="doc8095_expiry_days" autocomplete="off" type="text" placeholder="例：180"></label>
+              <label class="single">到期地点<input name="doc8095_expiry_place" autocomplete="off" type="text" ></label>
+              <label class="wide">索赔行地址<textarea name="doc8095_claim_bank_address" autocomplete="off" rows="3" ></textarea></label>
+              <label class="single">签署行名称<input name="doc8095_sign_bank_name" autocomplete="off" type="text" ></label>
+              <label class="single">签署分行名称<input name="doc8095_sign_branch_name" autocomplete="off" type="text" ></label>
+              <label class="wide">签署人姓名与职务<input name="doc8095_signatory_names_titles" autocomplete="off" type="text" ></label>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="wizard-nav">
+        <div class="wizard-nav-left">
+          <button type="button" class="wizard-btn wizard-btn-prev" onclick="Wizard.prev()">上一步</button>
+        </div>
+        <div class="wizard-nav-right">
+          <button type="button" class="wizard-btn wizard-btn-next" onclick="Wizard.next()">下一步</button>
+          <button type="submit" class="wizard-btn wizard-btn-generate" id="generateAllBtn">生成全部 7 份 PDF</button>
+        </div>
+      </div>
+    </form>
+
+    <aside class="preview panel">
+      <h2>实时填写预览</h2>
+      <p>下方展示各文档的关键填写字段，最终 PDF 以 Word 模板排版为准。</p>
+      <div id="previewList" class="preview-list"></div>
+      <div class="notice">
+        <strong>填写提示</strong>
+        <p>常见问答：① 字段不会就空着，PDF 会自动以下划线占位；② 数字百分比只填数字（如 <code>1.5</code>，不要带 %）；③ 日期建议中俄并列，例如「2026年6月16日 / 16 июня 2026 g.」；④ 最终生成的是 ZIP 压缩包，内含 7 份独立 PDF。</p>
+      </div>
+      <div class="notice">
+        <strong>字段前缀说明</strong>
+        <p>每个字段名前缀标记其所属文档：<code>doc8088_</code>（委托代理协议）、<code>doc8089_</code>（俄英贸易合同）、<code>doc8091_</code>（附件2）、<code>doc8092_</code>（代理出口结算协议）、<code>doc8093_</code>（应付账款垫付协议）、<code>doc8094_</code>（垫付申请书与承诺函）、<code>doc8095_</code>（付款保函）。</p>
+      </div>
+      <div class="help-card">
+        <strong>下载失败怎么办</strong>
+        <ul>
+          <li>确认运行 <code>python server.py</code> 的窗口没有关闭</li>
+          <li>确认电脑安装了 LibreOffice 或 Word</li>
+          <li>ZIP 文件较大，请耐心等待生成完成</li>
+          <li>刷新页面后重新提交</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+  <script src="/wizard.js"></script>
+</body>
+</html>

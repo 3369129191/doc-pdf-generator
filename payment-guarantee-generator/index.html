@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>付款保函 PDF 自动生成</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/wizard.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Cross-border Contract Automation · 第七份文件</p>
+      <h1>付款保函 Payment Guarantee 智能生成台</h1>
+      <p class="summary">面向跨境贸易与供应链金融场景的专业付款保函生成页面。信息按业务流程拆分为 4 个步骤，可逐页填写、返回修改，最后一页统一生成 PDF。</p>
+      <div class="page-switch">
+        <a href="http://127.0.0.1:8088/">委托代理协议</a>
+        <a href="http://127.0.0.1:8089/">俄英贸易合同</a>
+        <a href="http://127.0.0.1:8091/">附件2</a>
+        <a href="http://127.0.0.1:8092/">代理出口结算协议</a>
+        <a href="http://127.0.0.1:8093/">应付账款垫付协议</a>
+        <a href="http://127.0.0.1:8094/">垫付申请书与承诺函</a>
+        <a class="active" href="http://127.0.0.1:8095/">当前：付款保函</a>
+        <a href="http://127.0.0.1:8090/">合并生成页</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span>Professional Generator</span>
+      <strong>Payment Guarantee · 自动填充 · PDF 输出</strong>
+      <small>已覆盖模板全部可填写位置：编号、日期、双方、担保行、协议、金额、索赔提交、到期与签署。</small>
+    </div>
+  </header>
+
+  <div class="steps-strip">
+    <div class="step-pill"><div class="num">1</div><div><div class="label">基础信息</div><div class="desc">编号、日期、受益人、申请人</div></div></div>
+    <div class="step-pill"><div class="num">2</div><div><div class="label">担保条款</div><div class="desc">担保行、协议、金额</div></div></div>
+    <div class="step-pill"><div class="num">3</div><div><div class="label">索赔提交</div><div class="desc">通知银行、提交地址、联系方式</div></div></div>
+    <div class="step-pill"><div class="num">4</div><div><div class="label">到期与签署</div><div class="desc">到期条款、签署区、生成 PDF</div></div></div>
+  </div>
+
+  <main class="layout wizard-shell">
+    <form id="guaranteeForm" class="panel wizard-container" method="post" action="/generate">
+      <div class="panel-head">
+        <div>
+          <h2>付款保函信息向导</h2>
+          <p>按步骤填写信息，可随时返回上一步修改。默认值来源于模板，可直接保留或按实际业务替换。</p>
+        </div>
+        <button type="button" id="resetBtn" class="ghost">恢复默认值</button>
+      </div>
+
+      <div class="wizard-progress">
+        <div class="wizard-progress-header">
+          <div class="wizard-progress-title">Payment Guarantee Workflow</div>
+          <div class="wizard-progress-counter"><span class="wizard-progress-text">步骤 1 / 4</span></div>
+        </div>
+        <div class="wizard-progress-track"><div class="wizard-progress-bar" style="width:25%"></div></div>
+        <div class="wizard-indicator"></div>
+      </div>
+
+      <div class="wizard-content">
+        <div class="wizard-step" data-wizard-step="1" data-wizard-title="基础信息">
+          <div class="wizard-step-title">基础信息</div>
+          <div class="wizard-step-subtitle">填写保函编号、出具日期、受益人和申请人。该部分决定保函抬头和主体身份。</div>
+
+          <section class="section-block" data-num="Ⅰ" data-step="第 1 步 · 基础信息">
+            <h3>保函基础信息</h3>
+            <div class="grid">
+              <label>Guarantee No. 保函编号<input name="guarantee_no" placeholder="例：PG-2026-001"></label>
+              <label>Date of Issue 出具日期<input name="issue_date" placeholder="例：17 June 2026"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅱ" data-step="第 1 步 · 受益人">
+            <h3>Beneficiary 受益人</h3>
+            <p class="section-tip">模板默认受益人为 SMARTCHAIN NEXUS LIMITED，如未变化可保留。</p>
+            <div class="grid">
+              <label>受益人名称<input name="beneficiary_name"></label>
+              <label class="wide">受益人地址<textarea name="beneficiary_address" rows="2"></textarea></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅲ" data-step="第 1 步 · 申请人">
+            <h3>Applicant / Buyer 申请人（买方）</h3>
+            <div class="grid">
+              <label>申请人 / 买方名称<input name="applicant_name"></label>
+              <label class="wide">申请人 / 买方地址<textarea name="applicant_address" rows="2"></textarea></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="2" data-wizard-title="担保条款">
+          <div class="wizard-step-title">担保条款</div>
+          <div class="wizard-step-subtitle">填写担保行、基础协议及担保金额。系统会自动替换模板中的星号协议号和金额占位。</div>
+
+          <section class="section-block" data-num="Ⅳ" data-step="第 2 步 · 担保行">
+            <h3>Guarantor 担保行</h3>
+            <p class="section-tip">对应模板第 6 条、提交信息和签署区。银行名称和 SWIFT 会在正文多个位置同步替换。</p>
+            <div class="grid">
+              <label class="wide">第 6 条：Branch Name and Full Address<input name="guarantor_branch_full_address" placeholder="例：Bank branch name and full address"></label>
+              <label>第 6 条：Swift Code<input name="guarantor_swift" placeholder="例：ASANRU8X"></label>
+              <label>提交/正文银行名称<input name="presentation_bank" placeholder="例：Bank of Asian-Pacific Bank"></label>
+              <label>提交/正文 SWIFT<input name="presentation_swift" placeholder="例：ASANRU8X"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅴ" data-step="第 2 步 · 基础协议与金额">
+            <h3>Underlying Relationship 与担保金额</h3>
+            <p class="section-tip">模板中出现的 <code>*** AP Finance Agreement</code>、<code>*** Account Payable Financing Agreement</code>、金额和 110% 都会自动替换。</p>
+            <div class="grid">
+              <label>融资/应付账款协议编号<input name="finance_agreement_no" placeholder="例：APF-2026-001"></label>
+              <label>协议名称<input name="finance_agreement_name" placeholder="例：Account Payable Financing Agreement"></label>
+              <label>基础金额 RMB<input name="base_amount" placeholder="例：145583.44"></label>
+              <label>担保比例 %<input name="guarantee_percent" placeholder="例：110"></label>
+              <label>担保金额 RMB<input name="guarantee_amount" placeholder="例：160141.78"></label>
+              <label>Account Payable 编号<input name="account_payable_no" placeholder="例：AP-2026-001"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="3" data-wizard-title="索赔提交">
+          <div class="wizard-step-title">索赔提交</div>
+          <div class="wizard-step-subtitle">填写通知银行、代理账户、提交银行地址与联系方式。该部分用于索赔文件递交和通信。</div>
+
+          <section class="section-block" data-num="Ⅵ" data-step="第 3 步 · Notice / Claim">
+            <h3>通知、索赔和提交信息</h3>
+            <p class="section-tip">对应第 4 条和第 10 条，包含通知银行、代理账户、提交银行地址、部门、电话、传真、Swift。</p>
+            <div class="grid">
+              <label>第 4 条通知/索赔银行<input name="notice_bank" placeholder="例：VTB Moscow"></label>
+              <label>卖方收款代理非居民账户<input name="collecting_agent_account" placeholder="例：40807810104800000155"></label>
+              <label>账户币种<input name="collecting_agent_currency" placeholder="例：RUB"></label>
+              <label>提交分行名称<input name="presentation_branch" placeholder="例：Moscow Branch"></label>
+              <label class="wide">提交地址<input name="presentation_address" placeholder="例：Full branch address"></label>
+              <label>Attention 部门<input name="presentation_department" placeholder="例：Guarantee Department"></label>
+              <label>Tel 电话<input name="presentation_tel" placeholder="例：+7 000 000 0000"></label>
+              <label>Fax 传真<input name="presentation_fax" placeholder="例：+7 000 000 0001"></label>
+              <label>SWIFT 行<input name="presentation_swift_line" placeholder="默认沿用提交 SWIFT"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="4" data-wizard-title="到期签署">
+          <div class="wizard-step-title">到期与签署</div>
+          <div class="wizard-step-subtitle">确认到期规则、索赔提交地址和文末签署信息。确认无误后点击“生成 PDF”。</div>
+
+          <section class="section-block" data-num="Ⅶ" data-step="第 4 步 · Expiry">
+            <h3>Expiry 到期条款</h3>
+            <div class="grid">
+              <label>出具日起算天数<input name="expiry_days" placeholder="例：100"></label>
+              <label>到期地点 / 柜台<input name="expiry_place" placeholder="例：Guarantor’s counter"></label>
+              <label class="wide">索赔提交地址（替换 [bank’s address]）<input name="claim_bank_address" placeholder="默认使用上方提交地址"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅷ" data-step="第 4 步 · 签署区">
+            <h3>签署区</h3>
+            <p class="section-tip">对应文末 <code>BANK OF XXX</code>、<code>[Branch Name]</code>、<code>(Name(s) and Title(s))</code>。</p>
+            <div class="grid">
+              <label>签署银行名称（大写）<input name="sign_bank_name" placeholder="默认沿用提交银行名称的大写"></label>
+              <label>签署分行名称<input name="sign_branch_name" placeholder="默认沿用提交分行名称"></label>
+              <label class="wide">签字人姓名和职务<input name="signatory_names_titles" placeholder="例：Ivan Ivanov, Head of Guarantee Department"></label>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="wizard-nav">
+        <div class="wizard-nav-left">
+          <button type="button" class="wizard-btn wizard-btn-prev" onclick="Wizard.prev()">上一步</button>
+          <span id="status" class="wizard-status"></span>
+        </div>
+        <div class="wizard-nav-right">
+          <button type="button" class="wizard-btn wizard-btn-next" onclick="Wizard.next()">下一步</button>
+          <button type="button" class="wizard-btn wizard-btn-generate" onclick="Wizard.generate()">生成 PDF</button>
+        </div>
+      </div>
+    </form>
+
+    <aside class="preview panel">
+      <h2>实时预览</h2>
+      <p>显示核心字段，最终 PDF 以 Word 模板排版为准。</p>
+      <div id="previewList" class="preview-list"></div>
+      <div class="notice">
+        <strong>向导说明</strong>
+        <p>当前样板页已经改为翻页式填写。你可以通过底部按钮前进/返回，也可以点击顶部步骤圆点跳转检查。生成按钮只在最后一步出现。</p>
+      </div>
+      <div class="notice">
+        <strong>已覆盖的模板占位</strong>
+        <p><code>Guarantee No.</code>、<code>Date of Issue</code>、受益人括号、买方括号、担保行地址、Swift、<code>***</code> 协议号、110% 与两处 RMB 金额、索赔提交银行/地址/部门/电话/传真、<code>No.** Account Payable</code>、100 days、<code>[bank’s address]</code>、文末银行和签字人。</p>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+  <script src="/wizard.js"></script>
+</body>
+</html>

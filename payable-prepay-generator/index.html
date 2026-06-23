@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>应付账款垫付协议 PDF 自动生成</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/wizard.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Cross-border Contract Automation · 第五份文件</p>
+      <h1>进口应付账款委托垫付框架协议智能生成台</h1>
+      <p class="summary">面向跨境贸易和供应链金融场景的专业垫付协议生成页面。所有原填写项、动态服务费用明细和 PDF 生成方式均保留，仅将页面整理成和第六、第七份文件相似的逐步填写版式。</p>
+      <div class="page-switch">
+        <a href="http://127.0.0.1:8088/">委托代理协议</a>
+        <a href="http://127.0.0.1:8089/">俄英贸易合同</a>
+        <a href="http://127.0.0.1:8091/">附件2</a>
+        <a href="http://127.0.0.1:8092/">代理出口结算协议</a>
+        <a class="active" href="http://127.0.0.1:8093/">当前：应付账款垫付协议</a>
+        <a href="http://127.0.0.1:8094/">垫付申请书与承诺函</a>
+        <a href="http://127.0.0.1:8095/">付款保函</a>
+        <a href="http://127.0.0.1:8090/">合并生成页</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span>Professional Generator</span>
+      <strong>Payable Prepay Agreement · 自动填充 · PDF 输出</strong>
+      <small>已保留原页面全部填写项：协议头、甲乙双方、正文条款、附件一费率、附件二服务期/明细、签署信息。</small>
+    </div>
+  </header>
+
+  <div class="steps-strip">
+    <div class="step-pill"><div class="num">1</div><div><div class="label">协议头</div><div class="desc">编号、签订日期、签订地点</div></div></div>
+    <div class="step-pill"><div class="num">2</div><div><div class="label">甲乙双方</div><div class="desc">甲方垫付方、乙方委托方</div></div></div>
+    <div class="step-pill"><div class="num">3</div><div><div class="label">条款附件</div><div class="desc">出口商、邮箱、费率、服务期</div></div></div>
+    <div class="step-pill"><div class="num">4</div><div><div class="label">签署生成</div><div class="desc">签字栏、实时预览、生成 PDF</div></div></div>
+  </div>
+
+  <main class="layout wizard-shell">
+    <form id="payableForm" class="panel wizard-container" method="post" action="/generate">
+      <div class="panel-head">
+        <div>
+          <h2>垫付框架协议信息向导</h2>
+          <p>按步骤填写信息，可随时返回上一步修改。默认值来源于模板，不改的字段会沿用 Word 原文；原来的动态服务费用明细和生成逻辑保持不变。</p>
+        </div>
+        <button type="button" id="resetBtn" class="ghost">恢复默认值</button>
+      </div>
+
+      <div class="wizard-progress">
+        <div class="wizard-progress-header">
+          <div class="wizard-progress-title">Payable Prepay Agreement Workflow</div>
+          <div class="wizard-progress-counter"><span class="wizard-progress-text">步骤 1 / 4</span></div>
+        </div>
+        <div class="wizard-progress-track"><div class="wizard-progress-bar" style="width:25%"></div></div>
+        <div class="wizard-indicator"></div>
+      </div>
+
+      <div class="wizard-content">
+        <div class="wizard-step" data-wizard-step="1" data-wizard-title="协议头">
+          <div class="wizard-step-title">协议头</div>
+          <div class="wizard-step-subtitle">填写协议第一页顶部的编号、签订日期和签订地点。建议中俄文信息同时填写，便于模板同步替换。</div>
+
+          <section class="section-block" data-num="Ⅰ" data-step="第 1 步 · 协议头">
+            <h3>协议头</h3>
+            <p class="section-tip">协议第一页最顶部三行：编号、签订日期、签订地点。<strong>建议中俄文同时填写</strong>。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">这一节填什么</span>
+              <ol>
+                <li><b>协议编号</b>：例如 <code>SM-TH01</code></li>
+                <li><b>签订日期</b>：中文 + 俄文各一份</li>
+                <li><b>签订地点</b>：城市名，中俄各一份</li>
+              </ol>
+            </div>
+            <div class="grid">
+              <label>协议编号<input name="contract_no" placeholder="例：SM-TH01"></label>
+              <label>签订日期（中文）<input name="sign_date_zh" placeholder="例：2026年6月17日"></label>
+              <label>签订日期（俄文）<input name="sign_date_ru" placeholder="例：17 июня 2026 г."></label>
+              <label>签订地点（中文）<input name="sign_place_zh" placeholder="例：上海"></label>
+              <label class="wide">签订地点（俄文）<input name="sign_place_ru" placeholder="例：Шанхай"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="2" data-wizard-title="甲乙双方">
+          <div class="wizard-step-title">甲乙双方</div>
+          <div class="wizard-step-subtitle">填写甲方（垫付方）和乙方（垫付委托方）的公司、税号、地址、联系人、电话和邮箱。</div>
+
+          <section class="section-block" data-num="Ⅱ" data-step="第 2 步 · 甲方">
+            <h3>甲方（垫付方）信息</h3>
+            <p class="section-tip"><strong>甲方 = 提供垫付服务的一方</strong>。模板默认是智鏈通達，如实际业务中甲方有变，请全部修改。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">甲方必填项</span>
+              <ul>
+                <li><b>公司名</b>（中/俄各一份）</li>
+                <li><b>INN / KPP</b>（俄罗斯税号体系）</li>
+                <li><b>地址 / 联系人 / 电话 / 邮箱</b>（中俄各一份）</li>
+              </ul>
+            </div>
+            <div class="grid">
+              <label>甲方公司名（中文）<input name="partyA_name_zh" placeholder="例：智鏈通達供應鏈管理有限公司"></label>
+              <label>甲方公司名（俄文）<input name="partyA_name_ru" placeholder="例：СМАРТЧЭЙН НЕКСУС ЛИМИТЕД"></label>
+              <label>INN<input name="partyA_inn" placeholder="例：9909721327"></label>
+              <label>KPP<input name="partyA_kpp" placeholder="例：784287001"></label>
+              <label class="wide">联系地址（中文）<textarea name="partyA_address_zh" rows="2" placeholder="例：香港新蒲崗太子道東 706 號太子工業大廈海德匯 24 樓 A27 室"></textarea></label>
+              <label class="wide">联系地址（俄文）<textarea name="partyA_address_ru" rows="2" placeholder="例：ПОМЕЩЕНИЕ/КОМНАТА А27, ЭТАЖ 24..."></textarea></label>
+              <label>联系人（中文）<input name="partyA_contact_zh" placeholder="例：黎健文"></label>
+              <label>联系人（俄文）<input name="partyA_contact_ru" placeholder="例：Ли Цзяньвэнь"></label>
+              <label>电话<input name="partyA_tel" placeholder="例：+852-21349717"></label>
+              <label>电话（俄文版）<input name="partyA_tel_ru" placeholder="可与上格相同"></label>
+              <label>邮箱<input name="partyA_email" placeholder="例：info@aftproject.ru"></label>
+              <label>邮箱（俄文版）<input name="partyA_email_ru" placeholder="可与上格相同"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅲ" data-step="第 2 步 · 乙方">
+            <h3>乙方（垫付委托方）信息</h3>
+            <p class="section-tip"><strong>乙方 = 找甲方垫付应付账款的进口商</strong>。模板默认是 AIRFLOT，必须改成实际客户。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">乙方必填项</span>
+              <ul>
+                <li><b>公司名</b>（中/英 + 俄文各一份）</li>
+                <li><b>INN / KPP / 统一社会信用代码</b></li>
+                <li><b>地址 / 联系人 / 电话 / 邮箱</b>（中俄各一份）</li>
+              </ul>
+            </div>
+            <div class="grid">
+              <label>乙方公司名（中/英）<input name="partyB_name_zh" placeholder="例：AIRFLOT TECHNICS TH Ltd."></label>
+              <label>乙方公司名（俄文）<input name="partyB_name_ru" placeholder="例：OOO «Торговый Дом ЭЙРФЛОТ ТЕХНИКС»"></label>
+              <label>INN<input name="partyB_inn" placeholder="例：9909721327"></label>
+              <label>KPP（俄方）<input name="partyB_kpp" placeholder="例：784287001"></label>
+              <label>统一社会信用代码（中方填写）<input name="partyB_credit_code" placeholder="如非俄方公司，填中国 18 位编码"></label>
+              <label>ИНН（俄文版）<input name="partyB_inn_ru" placeholder="可与 INN 相同"></label>
+              <label class="wide">联系地址（中文/英文）<textarea name="partyB_address_zh" rows="2" placeholder="例：Polkovaya Street 3, bld.5, Moscow, Russia"></textarea></label>
+              <label class="wide">联系地址（俄文）<textarea name="partyB_address_ru" rows="2" placeholder="例：127018, Россия, г. Москва..."></textarea></label>
+              <label>联系人（中文/英文）<input name="partyB_contact_zh" placeholder="例：Zhuravlev Sergey Vladimirovich"></label>
+              <label>联系人（俄文）<input name="partyB_contact_ru" placeholder="例：Журавлева Сергея Владимировича"></label>
+              <label>电话<input name="partyB_tel" placeholder="例：+7 (495) 221-8026"></label>
+              <label>电话（俄文版）<input name="partyB_tel_ru" placeholder="可与上格相同"></label>
+              <label>邮箱<input name="partyB_email" placeholder="例：info@aftproject.ru"></label>
+              <label>邮箱（俄文版）<input name="partyB_email_ru" placeholder="可与上格相同"></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="3" data-wizard-title="条款附件">
+          <div class="wizard-step-title">正文条款与附件</div>
+          <div class="wizard-step-subtitle">填写正文中的贸易出口商、联系邮箱、附件一费率确认单、附件二服务期及服务费用明细。</div>
+
+          <section class="section-block" data-num="Ⅳ" data-step="第 3 步 · 正文">
+            <h3>正文条款中的可变信息</h3>
+            <p class="section-tip">协议第一条里嵌着<strong>贸易出口商公司名</strong>和<strong>双方联系邮箱</strong>，这些都会出现在中俄文正文中。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">需要修改的内容</span>
+              <ol>
+                <li><b>贸易出口商公司名</b>：乙方与谁签的贸易合同（默认 GUANGDONG OSHUJIAN）</li>
+                <li><b>乙方联系邮箱</b>：正文 1.2 条款中乙方指定的联系邮箱</li>
+                <li><b>甲方联系邮箱</b>：正文 1.2 条款中甲方指定的联系邮箱</li>
+              </ol>
+            </div>
+            <div class="grid">
+              <label class="wide">贸易出口商公司名（英文/中俄通用）<input name="trade_seller_name" placeholder="例：GUANGDONG OSHUJIAN FURNITURE CO.,LTD"></label>
+              <label>乙方联系邮箱（正文 1.2 条款）<input name="partyB_contact_email" placeholder="例：106442819@qq.com"></label>
+              <label>甲方联系邮箱（正文 1.2 条款）<input name="partyA_contact_email" placeholder="例：info@aftproject.ru"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅴ" data-step="第 3 步 · 费率">
+            <h3>附件一：垫付资金占用费率确认单</h3>
+            <p class="section-tip"><strong>这是协议核心金额条款</strong>。比例字段只填数字（不带 <code>%</code>）。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">必填四项</span>
+              <ol>
+                <li><b>资金占用年化费率</b>（如 <code>8</code> 表示 8%）</li>
+                <li><b>逾期年化费率</b>（如 <code>18</code>）</li>
+                <li><b>订单编号</b> & <b>客户编号</b></li>
+                <li><b>乙方在中国联络人姓名</b></li>
+              </ol>
+            </div>
+            <div class="grid">
+              <label>附件一·协议编号<input name="annex1_contract_no" placeholder="例：SM-TH01"></label>
+              <label>附件一·订单编号<input name="annex1_order_no" placeholder="例：ORD-20260617-001"></label>
+              <label>附件一·客户编号<input name="annex1_client_no" placeholder="例：CL-001"></label>
+              <label>资金占用年化费率（%）<input name="fee_annual_percent" placeholder="例：8"></label>
+              <label>逾期年化费率（%）<input name="fee_overdue_percent" placeholder="例：18"></label>
+              <label class="wide">乙方在中国联络人姓名<input name="contact_china_name" placeholder="例：张三"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅵ" data-step="第 3 步 · 服务期">
+            <h3>附件二：垫付资金占用费确认单</h3>
+            <p class="section-tip">这是结算单，记录服务起止日期与本次结算金额。<strong>未发生实际垫付前可留空</strong>。</p>
+            <div class="grid">
+              <label>附件二·协议编号<input name="annex2_contract_no" placeholder="例：SM-TH01"></label>
+              <label>附件二·订单编号<input name="annex2_order_no" placeholder="例：ORD-20260617-001"></label>
+              <label>合计金额（人民币元）<input name="total_cny" placeholder="例：100000.00"></label>
+              <label>服务起始 · 年<input name="service_start_year" placeholder="例：2026"></label>
+              <label>服务起始 · 月<input name="service_start_month" placeholder="例：06"></label>
+              <label>服务起始 · 日<input name="service_start_day" placeholder="例：17"></label>
+              <label>服务终止 · 年<input name="service_end_year" placeholder="例：2026"></label>
+              <label>服务终止 · 月<input name="service_end_month" placeholder="例：09"></label>
+              <label>服务终止 · 日<input name="service_end_day" placeholder="例：17"></label>
+            </div>
+          </section>
+
+          <section class="section-block" data-num="Ⅶ" data-step="可选">
+            <h3>附件二：服务费用明细（可选）</h3>
+            <p class="section-tip">附件二里有一张 3 行费用明细表。点击「+ 添加一行」可增加；不需要时全部留空。</p>
+            <input type="hidden" name="service_items_json" id="serviceItemsJson">
+            <div id="serviceItems"></div>
+            <button type="button" id="addServiceBtn" class="ghost" style="margin-top:12px">+ 添加一行服务费用</button>
+          </section>
+        </div>
+
+        <div class="wizard-step" data-wizard-step="4" data-wizard-title="签署生成">
+          <div class="wizard-step-title">签署与生成</div>
+          <div class="wizard-step-subtitle">填写协议正文末尾、附件一、附件二共 5 处签字栏的日期与授权代表姓名。确认后生成 PDF。</div>
+
+          <section class="section-block" data-num="Ⅷ" data-step="第 4 步 · 签署">
+            <h3>签署信息</h3>
+            <p class="section-tip">协议正文末尾、附件一、附件二共 5 处签字栏的日期与授权代表姓名。</p>
+            <div class="tip-list">
+              <span class="tip-list-title">签字栏填写</span>
+              <ol>
+                <li><b>签署日期</b>：年月日，会同步到所有 5 处签字栏</li>
+                <li><b>甲方授权代表姓名</b>：签字栏打印名</li>
+                <li><b>乙方授权代表姓名</b>：签字栏打印名</li>
+              </ol>
+            </div>
+            <div class="grid">
+              <label>签署日期 · 年<input name="sign_year" placeholder="例：2026"></label>
+              <label>签署日期 · 月<input name="sign_month" placeholder="例：6"></label>
+              <label>签署日期 · 日<input name="sign_day" placeholder="例：17"></label>
+              <label>甲方授权代表姓名<input name="partyA_signer" placeholder="例：黎健文"></label>
+              <label>甲方授权代表姓名（俄文）<input name="partyA_signer_ru" placeholder="例：Ли Цзяньвэнь"></label>
+              <label>乙方授权代表姓名<input name="partyB_signer" placeholder="例：Zhuravlev Sergey Vladimirovich"></label>
+              <label>乙方授权代表姓名（俄文）<input name="partyB_signer_ru" placeholder="例：Журавлева Сергея Владимировича"></label>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="wizard-nav">
+        <div class="wizard-nav-left">
+          <button type="button" class="wizard-btn wizard-btn-prev" onclick="Wizard.prev()">上一步</button>
+          <span id="status" class="wizard-status"></span>
+        </div>
+        <div class="wizard-nav-right">
+          <button type="button" class="wizard-btn wizard-btn-next" onclick="Wizard.next()">下一步</button>
+          <button type="submit" class="wizard-btn wizard-btn-generate" id="generate-btn">生成 PDF</button>
+        </div>
+      </div>
+    </form>
+
+    <aside class="preview panel">
+      <h2>实时填写预览</h2>
+      <p>这里只展示主要替换字段，最终 PDF 以 Word 模板排版为准。</p>
+      <div id="previewList" class="preview-list"></div>
+      <div class="notice">
+        <strong>填写常见疑问</strong>
+        <p>① 比例字段只填数字，不要带 %；② 甲方默认是智鏈通達，如不变可不填；③ 乙方必须改成实际客户公司名；④ 服务期/合计金额留到结算时再填也可以；⑤ 服务费用明细保留原来的添加行方式。</p>
+      </div>
+      <div class="notice">
+        <strong>已保留的填写内容</strong>
+        <p>协议编号、签订日期/地点、甲乙双方公司和联系方式、贸易出口商、双方正文邮箱、附件一协议/订单/客户编号、年化和逾期费率、中国联络人、附件二服务期、合计金额、服务费用明细、签署日期和授权代表。</p>
+      </div>
+      <div class="help-card">
+        <strong>跳转其他页面</strong>
+        <ul>
+          <li>第四份：<a href="http://127.0.0.1:8092/">代理出口结算协议</a></li>
+          <li>第六份：<a href="http://127.0.0.1:8094/">垫付申请书与承诺函</a></li>
+          <li>第七份：<a href="http://127.0.0.1:8095/">付款保函</a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+  <script src="/wizard.js"></script>
+</body>
+</html>
